@@ -1,0 +1,45 @@
+.content-wrapper {
+	display: flex;
+	justify-content: center;
+}
+
+.main-content {
+	display: flex;
+	flex-direction: column;
+}
+
+.button-container {
+	border-style: solid;
+	border-color: #000000;
+	border-width: 2px;
+	border-radius: 2px;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	background-color: #181818;
+}
+
+.button {
+	border-style: none;
+	border-radius: 30px;
+	border-color: #000000;
+	text-align: center;
+	color: #FFFFFF;
+	text-decoration: none;
+}
+
+.big-button {
+
+}
+
+.small-button {
+
+}
+
+.blue-button {
+	background-color: #07AAE1;
+}
+
+.pink-button {
+	background-color: #EE4298;
+}
