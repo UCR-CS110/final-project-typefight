@@ -15,13 +15,16 @@ async function loginUser(username, password){
             username,
             password
         })
-    }).then((res) => res.json())
+    }).then((res) =>res.json())
+    .then((token) => {
+      // console.log(token.data);
+      localStorage.setItem('token', token.data, 1000*60*60);
+    })
 }
-
+      // 
 export default function Login({setToken}){
     const [username, setUser] = useState();
     const [password, setPassword] = useState();
-  
     const handleSubmit = async e => {
       e.preventDefault();
       const token = await loginUser(
@@ -46,8 +49,10 @@ export default function Login({setToken}){
             <input type="password" onChange={e => setPassword(e.target.value)} />
           </label>
           <div>
-            <button type="submit">Submit</button>
+            <button type="submit">Login</button>
+            <button type='button' onClick={}>Change Password</button>
           </div>
+ 
         </form>
       </div>
       </div>

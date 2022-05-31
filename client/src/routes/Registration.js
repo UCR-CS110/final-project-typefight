@@ -16,7 +16,11 @@ async function registerUser(username, password){
             username,
             password
         })
-    }).then((res) => res.json())
+    }).then((res) =>{
+        res.json();
+        console.log(res.json);
+        localStorage.setItem('token', res, 1000*60*60);
+      })
 }
 
 export default function Register({setToken}){
