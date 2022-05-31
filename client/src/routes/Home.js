@@ -15,7 +15,7 @@ class Home extends Component {
 			<body>
 				<Navbar/>
 				<div className="content-wrapper">
-					<div>TypeFight</div>
+					<div className="logo">TypeFight</div>
 					<div className="button-container">
 						<a href="play" className="button big-button blue-button">Play</a>
 						<a href="rankings" className="button small-button pink-button">Rankings</a>
