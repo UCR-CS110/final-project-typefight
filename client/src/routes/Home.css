@@ -1,13 +1,3 @@
-.content-wrapper {
-	display: flex;
-	justify-content: center;
-}
-
-.main-content {
-	display: flex;
-	flex-direction: column;
-}
-
 .button-container {
 	border-style: solid;
 	border-color: #000000;
