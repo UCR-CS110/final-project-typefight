@@ -2,26 +2,35 @@ import { Component } from "react";
 import './Profile.css'
 import './Page.css'
 import Navbar from '../components/Navbar.js'
-//import ReactRoundedImage from "react-rounded-image";
 import DefaultImage from '../images/default-profile-picture.png'
 
-class Home extends Component {
-	/*
+class Profile extends Component {
 	constructor(props) {
 		super(props)
 	}
-	*/
-
+	
 	render() {
 		let token = localStorage.getItem('token');
-		let username = localStorage.getItem('username');
-		if (token !== undefined) {
+		let commentUsername = localStorage.getItem('username');
+		// TODO: react v6 deprecated this notation to get route params. I will have to change this to a functional component.
+		//let profileUsername = this.props.match.params.username;
+		let commentBox;
+
+		if (token !== undefined && token !== null) {
 			// validate the login token
 			console.log(token);
-			console.log(username);
+			console.log(commentUsername);
+			commentBox = <form action="/message" method="POST">
+							<input type="hidden" name="username" id="nickname" value=""/>
+							<textarea type="text" className="comment-input" placeholder="Write a new comment..."/>
+							<input type="submit" className="button post-button blue-button" value="Post Comment"/>
+						</form>
 		}
-		else
+		else {
 			console.log("no login token");
+			commentBox = <div/>;
+		}
+			
 		return(
 			<body>
 				<Navbar/>
@@ -45,15 +54,11 @@ class Home extends Component {
 					</div>
 					<div className="container comments-container">
 						<u className="header">Comments</u>
-						<form action="/message" method="POST">
-							<input type="hidden" name="username" id="nickname" value=""/>
-							<textarea type="text" className="comment-input" placeholder="Write a new comment..."/>
-							<input type="submit" className="button post-button blue-button" value="Post Comment"/>
-						</form>
+						{commentBox}
 					</div>
 				</div>
 			</body>
 	)}
 }
 
-export default Home
+export default Profile
