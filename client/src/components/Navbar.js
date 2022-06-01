@@ -12,12 +12,12 @@ class Navbar extends Component {
 					</a>
 				</li>
 				<li>
-					<a href="rankings" className="navbar-link navbar-link-blue">
+					<a href="/rankings" className="navbar-link navbar-link-blue">
 					Rankings
 					</a>
 				</li>
 				<li>
-					<a href="admin" className="navbar-link navbar-link-pink">
+					<a href="/admin" className="navbar-link navbar-link-pink">
 					{/* TODO: Display Admin button conditional based on if logged in account is admin.*/}
 					Admin
 					</a>
