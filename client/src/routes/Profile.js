@@ -2,28 +2,41 @@ import { Component } from "react";
 import './Profile.css'
 import './Page.css'
 import Navbar from '../components/Navbar.js'
-import ReactRoundedImage from "react-rounded-image";
 import DefaultImage from '../images/default-profile-picture.png'
 
-class Home extends Component {
-	/*
+class Profile extends Component {
 	constructor(props) {
 		super(props)
 	}
-	*/
-
+	
 	render() {
+		let token = localStorage.getItem('token');
+		let commentUsername = localStorage.getItem('username');
+		// TODO: react v6 deprecated this notation to get route params. I will have to change this to a functional component.
+		//let profileUsername = this.props.match.params.username;
+		let commentBox;
+
+		if (token !== undefined && token !== null) {
+			// validate the login token
+			console.log(token);
+			console.log(commentUsername);
+			commentBox = <form action="/message" method="POST">
+							<input type="hidden" name="username" id="nickname" value=""/>
+							<textarea type="text" className="comment-input" placeholder="Write a new comment..."/>
+							<input type="submit" className="button post-button blue-button" value="Post Comment"/>
+						</form>
+		}
+		else {
+			console.log("no login token");
+			commentBox = <div/>;
+		}
+			
 		return(
 			<body>
 				<Navbar/>
 				<div className="content-wrapper">
 					<div className="container profile-owner-container">
-						<ReactRoundedImage
-							image={DefaultImage}
-							imageWidth="100"
-          					imageHeight="100"
-							roundedColor="#222222"
-						/>
+						<img src={DefaultImage} className="profile-picture" alt="user"/>
 						<div className="profile-owner-username">chatmansave</div>
 					</div>
 					<div className="row">
@@ -31,8 +44,8 @@ class Home extends Component {
 							<u className="header">Followers</u>
 						</div>
 						<div className="column">
-							<div className="container player-stats-container">
-								<u className="header">Player Stats</u>
+							<div className="container stats-container">
+								<u className="header">Stats</u>
 							</div>
 							<div className="container recent-games-container">
 								<u className="header">Recent Games</u>
@@ -41,12 +54,11 @@ class Home extends Component {
 					</div>
 					<div className="container comments-container">
 						<u className="header">Comments</u>
-						<textarea type="text" className="comment-input" placeholder="Write a new comment..."/>
-						<a href="play" className="button post-button blue-button">Post Comment</a>
+						{commentBox}
 					</div>
 				</div>
 			</body>
 	)}
 }
 
-export default Home
+export default Profile

@@ -8,7 +8,7 @@ import Home from './routes/Home.js';
 import Register from './routes/Registration.js';
 import Login from './routes/Login.js';
 import Rankings from './routes/Rankings.js';
-import Profile from './routes/Profile.js
+import Profile from './routes/Profile.js';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(

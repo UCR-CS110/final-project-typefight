@@ -10,7 +10,7 @@ import {
 
 async function registerUser(username, password){
     console.log(username);
-    return fetch('http://localhost:8080/api/register', {
+    return fetch('http://localhost:8080/register', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
@@ -20,10 +20,10 @@ async function registerUser(username, password){
             password
         })
     }).then((res) =>res.json()).then((token1) => {
-        console.log(token1);
-        localStorage.setItem('token', token1.data, 1000*60*60);
         if(token1.status==="ok"){
-            return true;
+          console.log(token1);
+          localStorage.setItem('token', token1.data, 1000*60*60);
+          return true;
         }
       })
 

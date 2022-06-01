@@ -1,3 +1,8 @@
+button {
+	background: none;
+	font-family: Urbanist;
+}
+
 .container {
 	border-width: 2px;
 	border-radius: 5px;
@@ -31,7 +36,7 @@
 	height: 500px;
 }
 
-.player-stats-container {
+.stats-container {
 	width: 450px;
 	height: 150px;
 }
@@ -43,7 +48,13 @@
 
 .profile-owner-username {
 	font-size: 50px;
-	padding: 5px;
+	margin: 7px;
+}
+
+.profile-picture {
+	width: 100px;
+	height: 100px;
+	border-radius: 50px;
 }
 
 .comments-container {
@@ -100,4 +111,5 @@
 
 .blue-button:hover {
 	background-color: #0392c2;
+	cursor:pointer;
 }
