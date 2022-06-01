@@ -1,8 +1,0 @@
-.Char {
-    display: inline-block;
-    min-width: .3em;
-}
-  
-.ActiveChar {
-    border-left: 1px solid green;
-}
