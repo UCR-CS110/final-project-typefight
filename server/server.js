@@ -9,6 +9,8 @@ const User = require("./models/User.js");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const JWT_SECRET="jsdjfsjfksdfjhsdjfhdsfkjsdhf87879837937987*&&%^$%$^&^&^&^ksjhfkdhfksdhkfjhdskfjhdsk";
+const fs = require('fs');
+
 
 const gameHandlers = require('./handlers/game.js');
 
@@ -30,6 +32,7 @@ mongoose.connect(db,//connect to db
     });
 
 app.get('/getPrompt', gameHandlers.getPrompt); // Would change url
+
 
 app.post('/api/change-password', async (req, res) => {
 	const { token, newpassword: plainTextPassword } = req.body
@@ -94,6 +97,7 @@ app.post('/api/register', async (req, res)=>{
 	console.log(req.body);
 
 	const {username, password: plainTextPassword } = req.body
+	const user = await User.findOne({username}).lean();
 
 	if(!username || typeof username !== 'string'){
 		return res.json({status:"error", error:"Invalid username"})
@@ -105,18 +109,29 @@ app.post('/api/register', async (req, res)=>{
 	if (plainTextPassword.length < 4 ) {
 		return res.json({status:"error", error:"Password is too short"})
 	}
-
+	if(user){
+		return res.json({status: 'error', error: 'Username already exists'})
+	}
 	const password = await bcrypt.hash(plainTextPassword, 10)
-	// create the user 
 	try{
 		await User.create({
 			username,
-			password
+			password,
+			gamesPlayed:0
 		})
 	}catch(error) {
 		console.log(error)
 		return res.json({status:"error"})
 	}
+	const reguser = await User.findOne({username}).lean();
+	const token = jwt.sign(
+		{
+			id: reguser._id,
+			username: reguser.username
+		},
+		JWT_SECRET
+	)
+	return res.json({status:"ok", data:token});
 })
 
 app.listen(port, () => console.log(`Server listening on http://localhost:${port}`));

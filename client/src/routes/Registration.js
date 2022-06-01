@@ -2,6 +2,9 @@ import React, {useState} from 'react';
 import PropTypes from 'prop-types';
 import "./Registration.css";
 import Navbar from '../components/Navbar.js'
+import {
+  useNavigate
+} from "react-router-dom";
 
 
 
@@ -16,23 +19,28 @@ async function registerUser(username, password){
             username,
             password
         })
-    }).then((res) =>{
-        res.json();
-        console.log(res.json);
-        localStorage.setItem('token', res, 1000*60*60);
+    }).then((res) =>res.json()).then((token1) => {
+        console.log(token1);
+        localStorage.setItem('token', token1.data, 1000*60*60);
+        if(token1.status==="ok"){
+            return true;
+        }
       })
+
 }
 
 export default function Register({setToken}){
     const [username, setUser] = useState();
     const [password, setPassword] = useState();
-  
+    const Navigate = useNavigate();
     const handleSubmit = async e => {
       e.preventDefault();
       const token = await registerUser(
         username,
         password
     );
+    if (token ===true)
+    Navigate("/");
     //   setToken(token);
     }
   
