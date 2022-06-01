@@ -4,7 +4,7 @@ import "./ChangePassword.css";
 
 
 async function ChangePassword(oldPassword, password, tokenCookie){
-    return fetch('http://localhost:8080/api/change-password', {
+    return fetch('http://localhost:8080/changePassword', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'

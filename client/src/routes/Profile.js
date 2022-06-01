@@ -14,9 +14,14 @@ class Home extends Component {
 
 	render() {
 		let token = localStorage.getItem('token');
-		if (token.status === 'ok') {
+		let username = localStorage.getItem('username');
+		if (token !== undefined) {
+			// validate the login token
 			console.log(token);
+			console.log(username);
 		}
+		else
+			console.log("no login token");
 		return(
 			<body>
 				<Navbar/>

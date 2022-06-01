@@ -10,7 +10,7 @@ import {
 
 async function loginUser(username, password){
 
-    return fetch('http://localhost:8080/api/login', {
+    return fetch('http://localhost:8080/validateLogin', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
@@ -22,10 +22,13 @@ async function loginUser(username, password){
     }).then((res) =>res.json())
     .then((token) => {
       // console.log(token.data);
-      localStorage.setItem('token', token.data, 1000*60*60);
       if(token.status==="ok"){
-          return true;
+        localStorage.setItem('token', token.data, 1000*60*60);
+        localStorage.setItem('username', username, 1000*60*60);
+        return true;
       }
+      else
+        return false;
     })
 }
       // 
