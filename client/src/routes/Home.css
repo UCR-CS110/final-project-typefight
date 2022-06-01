@@ -1,11 +1,10 @@
-.content-wrapper {
+.logo {
 	display: flex;
 	justify-content: center;
-}
-
-.main-content {
-	display: flex;
-	flex-direction: column;
+	font-size: 100px;
+	color: white;
+	margin: 20px auto;
+	margin-top: 30px;
 }
 
 .button-container {
@@ -15,31 +14,52 @@
 	border-radius: 2px;
 	display: flex;
 	flex-direction: column;
+	justify-content: center;
 	align-items: center;
-	background-color: #181818;
+	background-color: #222222;
+	width: 600px;
+	height: 514px;
 }
 
 .button {
+	display: flex;
+	align-items: center;
+	justify-content: center;
 	border-style: none;
-	border-radius: 30px;
+	border-radius: 15px;
 	border-color: #000000;
-	text-align: center;
 	color: #FFFFFF;
 	text-decoration: none;
+	letter-spacing: 5px;
+	width: 500px;
+	margin: 20px auto;
+	font-weight: bold;
 }
 
 .big-button {
-
+	height: 110px;
+	font-size: 75px;
+	padding-bottom: 8px;
 }
 
 .small-button {
-
+	height: 80px;
+	font-size: 55px;
+	padding-bottom: 5px;
 }
 
 .blue-button {
 	background-color: #07AAE1;
 }
 
+.blue-button:hover {
+	background-color: #0392c2;
+}
+
 .pink-button {
 	background-color: #EE4298;
+}
+
+.pink-button:hover {
+	background-color: #d4257c;
 }
