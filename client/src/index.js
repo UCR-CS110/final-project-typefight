@@ -5,6 +5,8 @@ import './Fonts/Urbanist.ttf';
 import reportWebVitals from './reportWebVitals';
 import {Routes, Route, BrowserRouter} from 'react-router-dom';
 import Home from './routes/Home.js';
+import Register from './routes/Registration';
+import Login from './routes/Login';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -12,6 +14,9 @@ root.render(
     <BrowserRouter>
       <Routes>
         <Route path = "/" element={<Home/>}/>
+        <Route path = "/Register" element={<Register/>}/>
+        <Route path = "/Login" element={<Login/>}/>
+        
       </Routes>
     </BrowserRouter>
   </React.StrictMode>
