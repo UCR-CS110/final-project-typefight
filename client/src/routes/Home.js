@@ -19,7 +19,7 @@ class Home extends Component {
 					<div className="button-container">
 						<a href="play" className="button big-button blue-button">Play</a>
 						<a href="rankings" className="button small-button pink-button">Rankings</a>
-						<a href="profile"className="button small-button pink-button">Profile</a>
+						<a href="profile/test"className="button small-button pink-button">Profile</a>
 					</div>
 				</div>
 			</body>

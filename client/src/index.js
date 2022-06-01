@@ -8,6 +8,7 @@ import Home from './routes/Home.js';
 import Register from './routes/Registration.js';
 import Login from './routes/Login.js';
 import Rankings from './routes/Rankings.js';
+import Profile from './routes/Profile.js
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -18,6 +19,7 @@ root.render(
         <Route path = "/register" element={<Register/>}/>
         <Route path = "/login" element={<Login/>}/>
         <Route path = "/rankings" element={<Rankings/>}/>
+        <Route path = "/profile/:username" element={<Profile/>}/>
       </Routes>
     </BrowserRouter>
   </React.StrictMode>

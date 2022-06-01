@@ -1,0 +1,103 @@
+.container {
+	border-width: 2px;
+	border-radius: 5px;
+	display: flex;
+	flex-direction: row;
+	background-color: #222222;
+	margin-top: 20px;
+	margin-left: 10px;
+	margin-right: 10px;
+}
+
+.row {
+	display: flex;
+	flex-direction: row;
+}
+
+.column {
+	display: flex;
+	flex-direction: column;
+}
+
+.profile-owner-container {
+	width: 450px;
+	height: 120px;
+	justify-content: center;
+	align-items: center;
+}
+
+.follower-container {
+	width: 450px;
+	height: 500px;
+}
+
+.player-stats-container {
+	width: 450px;
+	height: 150px;
+}
+
+.recent-games-container {
+	width: 450px;
+	height: 330px;
+}
+
+.profile-owner-username {
+	font-size: 50px;
+	padding: 5px;
+}
+
+.comments-container {
+	display: flex;
+	flex-direction: column;
+	width: 920px;
+}
+
+.header {
+	display: block;
+	width: 100%;
+	font-size: 20px;
+	text-align: left;
+}
+
+.comment-input {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	width: 90%;
+	margin: auto;
+	height: 80px;
+  }
+
+.button {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	border-style: none;
+	border-radius: 10px;
+	border-color: #000000;
+	text-decoration: none;
+	letter-spacing: 5px;
+	margin: 20px auto;
+	font-weight: bold;
+}
+
+.follow-button {
+	height: 110px;
+	font-size: 75px;
+	padding-bottom: 8px;
+}
+
+.post-button {
+	height: 30px;
+	width: 250px;
+	font-size: 20px;
+	padding-bottom: 5px;
+}
+
+.blue-button {
+	background-color: #07AAE1;
+}
+
+.blue-button:hover {
+	background-color: #0392c2;
+}
