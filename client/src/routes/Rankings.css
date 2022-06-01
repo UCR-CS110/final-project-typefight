@@ -1,0 +1,40 @@
+button {
+	background: none;
+	border: none;
+	font-family: Urbanist;
+	color: white;
+}
+
+.black-background {
+	background-color: #222222;
+}
+
+.sort-by-container {
+	display: flex;
+	flex-direction: row;
+	background-color: #4b4b4b;
+	padding: 5px;
+	border-style: none;
+	border-radius: 5px;
+}
+
+.sort-by-item {
+	margin-left: 10px;
+	margin-right: 10px;
+	font-size: larger;
+}
+
+.sort-by-button:focus {
+	text-decoration: underline;
+	color: rgb(233, 233, 233)
+}
+
+.sort-by-button:hover {
+	text-decoration: underline;
+	cursor:pointer;
+}
+
+.rankings-headings {
+	display: flex;
+	flex-direction: row;
+}

@@ -21,27 +21,33 @@
 }
 
 .navbar-link {
+	display: flex;
+	align-items: center;
+	justify-content: center;
 	border-style: solid;
 	border-width: 2px;
 	border-radius: 30px;
 	border-color: #000000;
-	padding: 10px;
 	color: #FFFFFF;
-	text-align: center;
+	padding: 8px;
 	text-decoration: none;
+	width: 80px;
 }
 
 .navbar-link-blue {
 	background-color: #07AAE1;
 }
 
+.navbar-link-blue:hover {
+	background-color: #0392c2;
+}
+
 .navbar-link-pink {
 	background-color: #EE4298;
 }
 
-a {
-	display: block;
-	width: 80px;
+.navbar-link-pink:hover {
+	background-color: #d4257c;
 }
 
 li {
