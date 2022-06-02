@@ -5,7 +5,7 @@ const Results = ({Retry, Stats}) => {
     useEffect(() => {
         let Send = Stats;
         Send.username = "TestUserName";
-        fetch("http://localhost:8080/api/postGameResults", {
+        fetch("http://localhost:8080/postGameResults", {
             method: "POST",
             headers: {
                 'Accep': 'application/json',
