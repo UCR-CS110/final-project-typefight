@@ -25,6 +25,10 @@ async function registerUser(username, password){
           localStorage.setItem('token', token1.data, 1000*60*60);
           return true;
         }
+        else{
+          alert(token1.error);
+          return false;
+        }
       })
 
 }
@@ -39,6 +43,7 @@ export default function Register({setToken}){
         username,
         password
     );
+    console.log( token);
     if (token ===true)
     Navigate("/");
     //   setToken(token);

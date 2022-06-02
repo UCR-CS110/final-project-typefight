@@ -27,8 +27,11 @@ async function loginUser(username, password){
         localStorage.setItem('username', username, 1000*60*60);
         return true;
       }
-      else
+      else{
+        alert(token.error);
+      
         return false;
+      }
     })
 }
       // 

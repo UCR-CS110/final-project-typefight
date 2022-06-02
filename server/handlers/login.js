@@ -27,7 +27,7 @@ async function changePassword(req, res){
 		const user = jwt.verify(token, JWT_SECRET)
 		const _id = user.id
 		const password = await bcrypt.hash(plainTextPassword, 10)
-
+		console.log(_id);
 		await User.updateOne(
 			{ _id },
 			{
@@ -65,7 +65,6 @@ async function validateLogin(req, res){
 }
 
 async function register(req, res){
-	console.log(req.body);
 
 	const {username, password: plainTextPassword } = req.body
 	const user = await User.findOne({username}).lean();
