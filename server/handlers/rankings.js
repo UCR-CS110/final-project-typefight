@@ -4,10 +4,11 @@ const User = require("../models/User.js");
 function rankingsByRank(req, res){
 	User.find().sort( {rankScore: -1 } ).lean().then(users => {
 		users.forEach(user => {
+			user.averageAccuracy = user.averageAccuracy/100;
 			delete user["password"];
 		});
 		console.log(users);
-		res.json("users")
+		res.json(users)
 	});
 }
 
@@ -15,10 +16,11 @@ function rankingsByRank(req, res){
 function rankingsByGamesPlayed(req, res){
     User.find().sort( {gamesPlayed: -1 } ).lean().then(users => {
 		users.forEach(user => {
+			user.averageAccuracy = user.averageAccuracy/100;
 			delete user["password"];
 		});
 		console.log(users);
-		res.json("users")
+		res.json(users)
 	});
 }
 
@@ -26,10 +28,11 @@ function rankingsByGamesPlayed(req, res){
 function rankingsByAverageWPM(req, res){
     User.find().sort( {avgWPM: -1 } ).lean().then(users => {
 		users.forEach(user => {
+			user.averageAccuracy = user.averageAccuracy/100;
 			delete user["password"];
 		});
 		console.log(users);
-		res.json("users")
+		res.json(users)
 	});
 }
 
@@ -37,10 +40,11 @@ function rankingsByAverageWPM(req, res){
 function rankingsByAverageAccuracy(req, res){
     User.find().sort( {avgAccuracy: -1 } ).lean().then(users => {
 		users.forEach(user => {
+			user.averageAccuracy = user.averageAccuracy/100;
 			delete user["password"];
 		});
 		console.log(users);
-		res.json("users")
+		res.json(users)
 	});
 }
 

@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import './Rankings.css'
 import './Page.css'
 import Navbar from '../components/Navbar.js'
+import Ranking from '../components/Ranking.js'
 
 function Rankings() {
 	const [rankings, setRankings] = useState([]);
@@ -32,7 +33,10 @@ function Rankings() {
 					<div>Accuracy</div>
 				</div>
 				<div className="rankings-container">
-
+					{rankings.map((ranking, index) => {
+						return <Ranking rank={index + 1} username={ranking.username} gamesPlayed={ranking.gamesPlayed}
+							averageWPM={ranking.averageWPM} averageAccuracy={ranking.averageAccuracy}/>
+					})}
 				</div>
 			</div>
 		</body>
