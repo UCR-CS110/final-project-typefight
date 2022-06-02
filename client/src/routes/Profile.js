@@ -8,12 +8,14 @@ import DefaultImage from '../images/default-profile-picture.png'
 import Comment from '../components/Comment.js'
 import Navbar from '../components/Navbar.js'
 import Follow from '../components/Follow.js'
+import Stat from '../components/Stat.js'
 
 
 function Profile() {
 
 	const [comments, setComments] = useState([]);
 	const [followers, setFollowers] = useState([]);
+	const [stats, setStats] = useState([]);
 
 	let params = useParams();
 	
@@ -41,6 +43,16 @@ function Profile() {
 			.then(data => setComments([...data]))
 			.catch(err => {
 				console.log("Error when rendering comments", err);
+			})
+	}, []);
+
+	// Load the stats for the current profile
+	useEffect(() => {
+		fetch(`http://localhost:8080/${profileUsername}/getStats`)
+			.then(response => response.json())
+			.then(data => setStats(data))
+			.catch(err => {
+				console.log("Error when rendering stats", err);
 			})
 	}, []);
 
@@ -89,7 +101,9 @@ function Profile() {
 					</div>
 					<div className="column">
 						<div className="container stats-container">
-							<u className="header">Stats</u>
+							{stats.map(stat => {
+								return <Stat gamesPlayed={stat.gamesPlayed} rankScore={stat.rankScore} averageWPM={stat.averageWPM} averageAccuracy={stat.averageAccuracy}/>
+							})}
 						</div>
 						<div className="container recent-games-container">
 							<u className="header">Recent Games</u>

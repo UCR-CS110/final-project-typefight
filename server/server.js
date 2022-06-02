@@ -29,8 +29,9 @@ mongoose.connect(db,//connect to db
     });
 
 app.get('/getPrompt', gameHandler.getPrompt); // Would change url
-
-app.post('/postGameResults', gameHandler.getResult);
+app.post('/postGameResults', gameHandler.postResult);
+app.get('/:username/updateStats', gameHandler.updateStats);
+app.get('/:username/getStats', gameHandler.getStats);
 
 app.post('/changePassword', loginHandler.changePassword);
 app.post('/validateLogin', loginHandler.validateLogin);
