@@ -90,14 +90,15 @@ function Rankings() {
 				</div>
 				<div className="rankings-headings">
 					<u>Rankings</u>
-					<div className="heading1">Games Played</div>
-					<div className="heading2">WPM</div>
-					<div className="heading2">Accuracy</div>
+					<div className="rank-score-heading">Rank</div>
+					<div className="games-played-heading">Games Played</div>
+					<div className="wpm-heading">WPM</div>
+					<div className="accuracy-heading">Accuracy</div>
 				</div>
 				<div className="rankings-container">
 					{rankings.map((ranking, index) => {
-						return <Ranking rank={index + 1} username={ranking.username} gamesPlayed={ranking.gamesPlayed}
-							averageWPM={ranking.averageWPM} averageAccuracy={ranking.averageAccuracy}/>
+						return <Ranking rank={index + 1} username={ranking.username} rankScore = {ranking.rankScore}
+						gamesPlayed={ranking.gamesPlayed} averageWPM={ranking.averageWPM} averageAccuracy={ranking.averageAccuracy}/>
 					})}
 				</div>
 			</div>

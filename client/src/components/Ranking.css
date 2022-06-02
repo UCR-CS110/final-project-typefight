@@ -24,24 +24,30 @@
 }
 
 .username {
-	width: 350px;
+	width: 200px;
 	margin-left: 40px;
+}
+
+.rank-score {
+	display: flex;
+	justify-content: center;
+	width: 150px;
 }
 
 .games-played {
 	display: flex;
 	justify-content: center;
-	width: 100px;
+	width: 150px;
 }
 
 .average-wpm {
 	display: flex;
 	justify-content: center;
-	width: 200px;
+	width: 150px;
 }
 
 .average-accuracy {
 	display: flex;
 	justify-content: center;
-	width: 100px;
+	width: 150px;
 }

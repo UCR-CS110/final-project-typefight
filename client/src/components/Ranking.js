@@ -8,6 +8,7 @@ export default function Ranking(props){
         <div className="rank">#{props.rank}</div>
         <img src={DefaultImage} className="picture" alt="user"/>
         <div className="username">{props.username}</div>
+        <div className="rank-score">{Math.trunc(props.rankScore)}</div>
         <div className="games-played">{props.gamesPlayed}</div>
         <div className="average-wpm">{Math.trunc(props.averageWPM)}</div>
         <div className="average-accuracy">{Math.trunc(props.averageAccuracy)}%</div>
