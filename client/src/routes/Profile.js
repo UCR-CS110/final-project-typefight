@@ -1,10 +1,15 @@
 import { useParams } from "react-router-dom";
+import React, { useState, useEffect } from 'react';
 import './Profile.css'
 import './Page.css'
 import Navbar from '../components/Navbar.js'
 import DefaultImage from '../images/default-profile-picture.png'
+import Comment from '../components/Comment.js'
 
 function Profile() {
+
+	const [comments, setComments] = useState([]);
+
 	let params = useParams();
 	
 	let token = localStorage.getItem('token');
@@ -12,7 +17,16 @@ function Profile() {
 	// TODO: react v6 deprecated this notation to get route params. I will have to change this to a functional component.
 	let profileUsername = params.username;
 	let commentBox;
-	let commentContainer;
+	
+	// Load all of the comments for the current profile
+	useEffect(() => {
+		fetch(`http://localhost:8080/$roverdog/comments`)
+			.then(response => response.json())
+			.then(data => setComments([...data]))
+			.catch(err => {
+				console.log("Error when rendering comments", err);
+			})
+	}, []);
 
 	if (token !== undefined && token !== null) {
 		// validate the login token
@@ -54,6 +68,9 @@ function Profile() {
 				<div className="container comments-container">
 					<u className="header">Comments</u>
 					{commentBox}
+					{comments.map(comment => {
+						return <Comment commenter={comment.commenter} text={comment.text} date={comment.date}>Test</Comment>
+					})}
 				</div>
 			</div>
 		</body>
