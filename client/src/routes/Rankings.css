@@ -13,7 +13,9 @@ button {
 	display: flex;
 	flex-direction: row;
 	background-color: #4b4b4b;
+	font-size: 20px;
 	padding: 5px;
+	margin-top: 40px;
 	border-style: none;
 	border-radius: 5px;
 }
@@ -37,4 +39,28 @@ button {
 .rankings-headings {
 	display: flex;
 	flex-direction: row;
+	width:1000px;
+	font-size: 28px;
+	align-items:flex-end;
+	margin: 10px auto;
+}
+
+u {
+	font-size: 40px;
+	margin-left: 30px;
+}
+
+.heading1 {
+	justify-content: center;
+	margin-left: 300px;
+}
+
+.heading2 {
+	justify-content: center;
+	margin-left: 30px;
+	margin-right: 35px;
+}
+
+.rankings-container {
+	margin-bottom: 40px;
 }

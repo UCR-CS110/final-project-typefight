@@ -27,10 +27,10 @@ function Rankings() {
 					<button className="sort-by-item sort-by-button">Accuracy</button>
 				</div>
 				<div className="rankings-headings">
-					<div>Rankings</div>
-					<div>Games Played</div>
-					<div>WPM</div>
-					<div>Accuracy</div>
+					<u>Rankings</u>
+					<div className="heading1">Games Played</div>
+					<div className="heading2">WPM</div>
+					<div className="heading2">Accuracy</div>
 				</div>
 				<div className="rankings-container">
 					{rankings.map((ranking, index) => {

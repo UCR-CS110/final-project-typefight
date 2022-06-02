@@ -1,0 +1,47 @@
+.ranking {
+	display: flex;
+	flex-direction: horizontal;
+	width: 1000px;
+	height: 80px;
+	background-color: #4b4b4b;
+	align-items: center;
+	margin: 3px auto;
+	border-radius: 7px;
+	font-size: 28px;
+	font-weight: bold;
+}
+
+.rank {
+	width:35px;
+	margin-left: 15px;
+	margin-right: 15px;
+}
+
+.picture {
+	height: 70px;
+    width: 70px;
+    border-radius: 50px;
+}
+
+.username {
+	width: 350px;
+	margin-left: 40px;
+}
+
+.games-played {
+	display: flex;
+	justify-content: center;
+	width: 100px;
+}
+
+.average-wpm {
+	display: flex;
+	justify-content: center;
+	width: 200px;
+}
+
+.average-accuracy {
+	display: flex;
+	justify-content: center;
+	width: 100px;
+}
