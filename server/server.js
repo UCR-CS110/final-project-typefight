@@ -47,7 +47,7 @@ app.post('/follow', followHandler.follow);
 app.get('/:profileOwner/getFollows', followHandler.getFollows);
 
 app.get('/rankingsByRank', rankingsHandler.rankingsByRank)
-app.get('/rankingsByByGamesPlayed', rankingsHandler.rankingsByGamesPlayed)
+app.get('/rankingsByGamesPlayed', rankingsHandler.rankingsByGamesPlayed)
 app.get('/rankingsByAverageWPM', rankingsHandler.rankingsByAverageWPM)
 app.get('/rankingsByAverageAccuracy', rankingsHandler.rankingsByAverageAccuracy)
 
