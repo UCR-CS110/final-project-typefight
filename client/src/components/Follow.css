@@ -1,0 +1,22 @@
+a {
+    color: inherit;
+    text-decoration: none;
+    text-align: center;
+}
+
+.follower{
+    width: 120px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+	align-items: center;
+}
+
+.follower-picture {
+    height: 100px;
+    width: 100px;
+    border-radius: 50px;
+}
+.follower-username {
+    font-size: 20px;
+}

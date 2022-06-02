@@ -12,6 +12,9 @@ class Home extends Component {
 
 
 	render() {
+
+		var profile = "profile/" + localStorage.getItem('username');
+
 		let token = localStorage.getItem('token');
 		let commentUsername = localStorage.getItem('username');
 		let prof;

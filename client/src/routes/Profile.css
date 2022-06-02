@@ -34,6 +34,15 @@ button {
 .follower-container {
 	width: 450px;
 	height: 500px;
+	display: flex;
+	flex-direction: column;
+}
+
+.follower-grid {
+	margin-left: 20px;
+	display: grid;
+	grid-template-areas: "a a a";
+	grid-auto-rows: 150px;
 }
 
 .stats-container {
@@ -66,8 +75,9 @@ button {
 .header {
 	display: block;
 	width: 100%;
-	font-size: 20px;
+	font-size: 25px;
 	text-align: left;
+	margin: 10px;
 }
 
 .comment-input {
@@ -84,7 +94,7 @@ button {
 	align-items: center;
 	justify-content: center;
 	border-style: none;
-	border-radius: 10px;
+	border-radius: 5px;
 	border-color: #000000;
 	text-decoration: none;
 	letter-spacing: 5px;
@@ -93,16 +103,17 @@ button {
 }
 
 .follow-button {
-	height: 110px;
-	font-size: 75px;
-	padding-bottom: 8px;
+	height: 30px;
+	font-size: 20px;
+	width: 150px;
+	margin: 10px;
+	margin-left: 170px;
 }
 
 .post-button {
 	height: 30px;
 	width: 250px;
 	font-size: 20px;
-	padding-bottom: 5px;
 }
 
 .blue-button {

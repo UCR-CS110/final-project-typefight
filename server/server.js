@@ -8,6 +8,7 @@ const cors = require('cors');
 const gameHandler = require('./handlers/game.js');
 const loginHandler = require('./handlers/login.js')
 const commentHandler = require('./handlers/comment.js')
+const followHandler = require('./handlers/follow.js')
 const rankingsHandler = require('./handlers/rankings.js')
 
 const app = express();
@@ -32,9 +33,7 @@ app.get('/getPrompt', gameHandler.getPrompt); // Would change url
 app.post('/postGameResults', gameHandler.getResult);
 
 app.post('/changePassword', loginHandler.changePassword);
-
 app.post('/validateLogin', loginHandler.validateLogin);
-
 app.post('/register', loginHandler.register);
 
 //app.post('/addToken', loginHandlers.addToken);
@@ -42,8 +41,10 @@ app.post('/register', loginHandler.register);
 //app.get('/validateToken/:token', loginHandlers.validateToken);
 
 app.post('/addComment', commentHandler.addComment);
-
 app.get('/:profileOwner/comments', commentHandler.loadComments);
+
+app.post('/follow', followHandler.follow);
+app.get('/:profileOwner/getFollows', followHandler.getFollows);
 
 app.get('/rankingsByRank', rankingsHandler.rankingsByRank)
 app.get('/rankingsByByGamesPlayed', rankingsHandler.rankingsByGamesPlayed)

@@ -2,21 +2,37 @@ import { useParams } from "react-router-dom";
 import React, { useState, useEffect } from 'react';
 import './Profile.css'
 import './Page.css'
-import Navbar from '../components/Navbar.js'
+
 import DefaultImage from '../images/default-profile-picture.png'
+
 import Comment from '../components/Comment.js'
+import Navbar from '../components/Navbar.js'
+import Follow from '../components/Follow.js'
+
 
 function Profile() {
 
 	const [comments, setComments] = useState([]);
+	const [followers, setFollowers] = useState([]);
 
 	let params = useParams();
 	
 	let token = localStorage.getItem('token');
-	let commentUsername = localStorage.getItem('username');
+	let sessionUsername = localStorage.getItem('username');
 	// TODO: react v6 deprecated this notation to get route params. I will have to change this to a functional component.
 	let profileUsername = params.username;
 	let commentBox;
+	let followButton;
+
+	// Load all of the followers for the current profile
+	useEffect(() => {
+		fetch(`http://localhost:8080/${profileUsername}/getFollows`)
+			.then(response => response.json())
+			.then(data => setFollowers([...data]))
+			.catch(err => {
+				console.log("Error when rendering followers", err);
+			})
+	}, []);
 	
 	// Load all of the comments for the current profile
 	useEffect(() => {
@@ -30,18 +46,25 @@ function Profile() {
 
 	if (token !== undefined && token !== null) {
 		// validate the login token
-		console.log(token);
-		console.log(commentUsername);
+		//console.log(token);
+		//console.log(sessionUsername);
 		commentBox = <form action="http://localhost:8080/addComment" method="POST">
 						<input type="hidden" name="profileOwner" value={profileUsername}/>
-						<input type="hidden" name="commenter" value={commentUsername}/>
+						<input type="hidden" name="commenter" value={sessionUsername}/>
 						<textarea type="text" name="text" className="comment-input" placeholder="Write a new comment..."/>
 						<input type="submit" className="button post-button blue-button" value="Post Comment"/>
 					</form>
+
+		followButton = <form action="http://localhost:8080/follow" method="POST">
+							<input type="hidden" name="profileOwner" value={profileUsername}/>
+							<input type="hidden" name="follower" value={sessionUsername}/>
+							<input type="submit" className="button follow-button blue-button" value="+Follower"/>
+						</form>
 	}
 	else {
 		console.log("no login token");
 		commentBox = <div/>;
+		followButton = <div/>;
 	}
 		
 	return(
@@ -54,7 +77,15 @@ function Profile() {
 				</div>
 				<div className="row">
 					<div className="container follower-container">
-						<u className="header">Followers</u>
+							<div className="row">
+								<u className="header">Followers</u>
+								{followButton}
+							</div>
+							<div className="follower-grid">
+								{followers.map(follower => {
+									return <Follow follower={follower.follower}/>
+								})}
+							</div>
 					</div>
 					<div className="column">
 						<div className="container stats-container">
@@ -69,7 +100,7 @@ function Profile() {
 					<u className="header">Comments</u>
 					{commentBox}
 					{comments.map(comment => {
-						return <Comment commenter={comment.commenter} text={comment.text} date={comment.date}>Test</Comment>
+						return <Comment commenter={comment.commenter} text={comment.text} date={comment.date}/>
 					})}
 				</div>
 			</div>
