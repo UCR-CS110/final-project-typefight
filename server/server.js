@@ -8,6 +8,7 @@ const cors = require('cors');
 const gameHandler = require('./handlers/game.js');
 const loginHandler = require('./handlers/login.js')
 const commentHandler = require('./handlers/comment.js')
+const followHandler = require('./handlers/follow.js')
 
 const app = express();
 const port = 8080;
@@ -29,9 +30,7 @@ mongoose.connect(db,//connect to db
 app.get('/getPrompt', gameHandler.getPrompt); // Would change url
 
 app.post('/changePassword', loginHandler.changePassword);
-
 app.post('/validateLogin', loginHandler.validateLogin);
-
 app.post('/register', loginHandler.register);
 
 //app.post('/addToken', loginHandlers.addToken);
@@ -39,7 +38,9 @@ app.post('/register', loginHandler.register);
 //app.get('/validateToken/:token', loginHandlers.validateToken);
 
 app.post('/addComment', commentHandler.addComment);
-
 app.get('/:profileOwner/comments', commentHandler.loadComments);
+
+app.post('/follow', followHandler.follow);
+app.get('/getFollows', followHandler.getFollows);
 
 app.listen(port, () => console.log(`Server listening on http://localhost:${port}`));
