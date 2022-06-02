@@ -15,14 +15,16 @@ class Profile extends Component {
 		// TODO: react v6 deprecated this notation to get route params. I will have to change this to a functional component.
 		//let profileUsername = this.props.match.params.username;
 		let commentBox;
+		let commentContainer;
 
 		if (token !== undefined && token !== null) {
 			// validate the login token
 			console.log(token);
 			console.log(commentUsername);
-			commentBox = <form action="/message" method="POST">
-							<input type="hidden" name="username" id="nickname" value=""/>
-							<textarea type="text" className="comment-input" placeholder="Write a new comment..."/>
+			commentBox = <form action="http://localhost:8080/addComment" method="POST">
+							<input type="hidden" name="profileOwner" value="roverdog"/>
+							<input type="hidden" name="commenter" value="roverdog"/>
+							<textarea type="text" name="text" className="comment-input" placeholder="Write a new comment..."/>
 							<input type="submit" className="button post-button blue-button" value="Post Comment"/>
 						</form>
 		}
