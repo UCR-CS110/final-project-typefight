@@ -50,15 +50,28 @@ u {
 	margin-left: 30px;
 }
 
-.heading1 {
-	justify-content: center;
-	margin-left: 300px;
+.rank-score-heading {
+	display: flex;
+	justify-content: right;
+	width: 290px;
 }
 
-.heading2 {
-	justify-content: center;
-	margin-left: 30px;
-	margin-right: 35px;
+.games-played-heading {
+	display: flex;
+	justify-content: right;
+	width: 210px;
+}
+
+.wpm-heading {
+	display: flex;
+	justify-content: right;
+	width: 95px;
+}
+
+.accuracy-heading {
+	display: flex;
+	justify-content: right;
+	width: 180px;
 }
 
 .rankings-container {
