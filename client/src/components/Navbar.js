@@ -1,24 +1,35 @@
 import { Component } from "react";
 import "./Navbar.css";
 
+
 class Navbar extends Component {
+
 	logout(){
 		localStorage.removeItem('token');
 		localStorage.removeItem('username');
 		window.location.reload();
 	}
+
 	render() {
 		let token = localStorage.getItem('token');
 		let commentUsername = localStorage.getItem('username');
 		let signin;
 		let register;
 		let signout;
+		let prof;
+		let user=localStorage.getItem('username');
+		
 		if(token!==undefined && token!==null){
 			signout=<li>
 						<button className="navbar-link navbar-link-blue" onClick={this.logout}>
 						Signout
 						</button>
 					</li>;
+			prof=<li>
+				<a href={`/profile/${user}`} className="navbar-link navbar-link-blue">
+						{user}
+						</a>
+			</li>
 			signin=<div/>;
 			register=<div/>;
 		}
@@ -33,6 +44,7 @@ class Navbar extends Component {
 						Sign Up
 						</a>
 					</li>;
+			prof=<div />;
 			signout=<div />;
 
 		}
@@ -60,6 +72,7 @@ class Navbar extends Component {
 				{/* TODO: Display login/signup or profile image conditionally based on if user is signed in.*/}
 				{signin}
 				{register}
+				{prof}
 				{signout}
 			</ul>
 		</nav>

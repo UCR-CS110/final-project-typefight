@@ -10,7 +10,18 @@ class Home extends Component {
 	}
 	*/
 
+
 	render() {
+		let token = localStorage.getItem('token');
+		let commentUsername = localStorage.getItem('username');
+		let prof;
+		if(token!==undefined && token!==null){
+			prof=<a href="profile/test"className="button small-button pink-button">Profile</a>
+		}
+		else{
+			prof=<div className="button small-button gray-button">Profile</div>
+		}
+
 		return(
 			<body>
 				<Navbar/>
@@ -19,7 +30,7 @@ class Home extends Component {
 					<div className="button-container">
 						<a href="play" className="button big-button blue-button">Play</a>
 						<a href="rankings" className="button small-button pink-button">Rankings</a>
-						<a href="profile/test"className="button small-button pink-button">Profile</a>
+						{prof}
 					</div>
 				</div>
 			</body>
