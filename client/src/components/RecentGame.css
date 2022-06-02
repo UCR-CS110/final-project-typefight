@@ -1,0 +1,31 @@
+.recent-game {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+	align-items: center;
+    border-width: 2px;
+	border-radius: 3px;
+	background-color: #3f3f3f;
+    margin-top: 4px;
+	margin-left: 8px;
+	margin-right: 8px;
+    height: 35px;
+    font-size: 20px;
+}
+
+.wpm{
+    width: 150px;
+    margin-left: 20px;
+}
+
+.accuracy {
+    width: 100px;
+}
+
+.date{
+    font-size: small;
+    color: #929292;
+    display: block;
+	text-align: right;
+    margin: 5px;
+}

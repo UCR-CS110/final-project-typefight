@@ -51,6 +51,8 @@ button {
 }
 
 .recent-games-container {
+	display: flex;
+	flex-direction: column;
 	width: 450px;
 	height: 330px;
 }
