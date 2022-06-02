@@ -8,7 +8,7 @@ export default function Follow(props){
                 <u className="header">Stats</u>
                 <div className="games-played">Games played: {props.gamesPlayed}</div>
             </div>
-            <div className="row">
+            <div className="main-stats">
                 <div className="rank-score">Score: {props.rankScore}</div>
                 <div className="wpm">WPM: {props.averageWPM}</div>
                 <div className="accuracy">ACC: {props.averageAccuracy}</div>
