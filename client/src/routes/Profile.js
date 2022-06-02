@@ -9,6 +9,7 @@ import Comment from '../components/Comment.js'
 import Navbar from '../components/Navbar.js'
 import Follow from '../components/Follow.js'
 import Stat from '../components/Stat.js'
+import RecentGame from '../components/RecentGame.js'
 
 
 function Profile() {
@@ -16,6 +17,7 @@ function Profile() {
 	const [comments, setComments] = useState([]);
 	const [followers, setFollowers] = useState([]);
 	const [stats, setStats] = useState([]);
+	const [recentGames, setRecentGames] = useState([]);
 
 	let params = useParams();
 	
@@ -53,6 +55,16 @@ function Profile() {
 			.then(data => setStats(data))
 			.catch(err => {
 				console.log("Error when rendering stats", err);
+			})
+	}, []);
+
+	// Load the recent games for the current profile
+	useEffect(() => {
+		fetch(`http://localhost:8080/${profileUsername}/getRecentGames`)
+			.then(response => response.json())
+			.then(data => setRecentGames(data))
+			.catch(err => {
+				console.log("Error when rendering recent games", err);
 			})
 	}, []);
 
@@ -103,13 +115,21 @@ function Profile() {
 						<div className="container stats-container">
 							{stats.map(stat => {
 								return <Stat gamesPlayed={stat.gamesPlayed}
-									rankScore={Math.trunc(stat.rankScore)}
-									averageWPM={Math.trunc(stat.averageWPM)}
-									averageAccuracy={Math.trunc(stat.averageAccuracy)}/>
+											rankScore={Math.trunc(stat.rankScore)}
+											averageWPM={Math.trunc(stat.averageWPM)}
+											averageAccuracy={Math.trunc(stat.averageAccuracy)}
+										/>
 							})}
 						</div>
 						<div className="container recent-games-container">
 							<u className="header">Recent Games</u>
+							{recentGames.map(recentGame => {
+								return <RecentGame
+											WPM={Math.trunc(recentGame.WPM)}
+											accuracy={Math.trunc(recentGame.accuracy)}
+											/*date={recentGame.date}*/
+										/>
+							})}
 						</div>
 					</div>
 				</div>

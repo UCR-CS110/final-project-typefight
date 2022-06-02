@@ -87,9 +87,19 @@ async function getStats(req,res) {
 	});
 }
 
+async function getRecentGames(req,res) {
+	// fetch all of the recent games for this profile
+	let username = req.params.username;
+	username = username.replace('$', '')
+	Game.find({username: username}).sort({$natural:-1}).limit(7).lean().then(games => {
+		res.json(games)
+	});
+}
+
 module.exports = {
     getPrompt,
     postResult,
     updateStats,
-    getStats
+    getStats,
+    getRecentGames
 };
