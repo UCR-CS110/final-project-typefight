@@ -16,11 +16,10 @@ const validateState = (k) => {
 
 const buildResults = (TotalTyped, Prompt, UserInput, CountDown) => {
     let Result = {Total: TotalTyped};
-    console.log("Test ", TotalTyped, Prompt, UserInput, CountDown);
     Result.Correct = Prompt.reduce((numCrrt, c, index) => {
         if (index > UserInput.length)
             return numCrrt;
-        return numCrrt + (c.letter === UserInput[index]);
+        return numCrrt + (c === UserInput[index]);
         }, 0);
     Result.Miss = UserInput.length - Result.Correct;
     Result.TimeMS = startingTime - CountDown;
@@ -33,8 +32,8 @@ const Game = ({Prompt, Finish, Report}) => {
     const [TOTAL, setTotal] = useState(0);
     const [activeIndex, setAI] = useState(0);
     const [userInput, setUI] = useState("");
-    const [prompt_array, setPA] = useState(Prompt.split("").map((char) => {return { letter: char }})); // This updates a little too late
     // Timer
+    const [timeOut, isTimeOut] = useState(false);
     const [renderCount, setRC] = useState(startingTime);
     const countDown = useRef(startingTime);
     const timer = useRef(0);
@@ -43,10 +42,14 @@ const Game = ({Prompt, Finish, Report}) => {
     const closeGame = () => {
         if(timer.current)
             clearInterval(timer.current);
-        let results = buildResults(TOTAL, prompt_array, userInput, countDown.current);
+        let results = buildResults(TOTAL, Prompt, userInput, countDown.current);
         Report(results);
         Finish(true);
     };
+
+    // Since closeGame can't be called in a nested function, an indirection is used (timeOut).
+    if(timeOut)
+        closeGame();
 
     // Called upon keypress. Responds differently depending on key type
     const assess = (key) => {
@@ -59,31 +62,30 @@ const Game = ({Prompt, Finish, Report}) => {
                         if(countDown.current === 0){
                             clearInterval(timer.current);
                             timer.current = 0;
-                            countDown.current = startingTime;
-                            //console.log("Killed Timer");
-                            //closeGame(); //userInput and TOTAL aren't being updated here
+                            isTimeOut(true);
                         }
                     }, 100);
                 }
-                console.log("valid");
+
+                //console.log("valid");
                 setUI(userInput + key);
                 setAI(activeIndex + 1);
                 setTotal(TOTAL + 1);
-                if(userInput.length+1 === prompt_array.length) // not quite the same?
+                if(userInput.length+1 === Prompt.length)
                     closeGame();
                 break;
             case(1): 
-                console.log("backspace");
+                //console.log("backspace");
                 if(activeIndex !== 0){
                     setUI(userInput.slice(0,-1));
                     setAI(activeIndex - 1);
                 }
                 break;
             case(2): 
-                console.log("control");
+                //console.log("control");
                 break;
             default: 
-                console.log("invalid");
+                //console.log("invalid");
                 break;
         };
     }
@@ -93,17 +95,16 @@ const Game = ({Prompt, Finish, Report}) => {
         className="Game-Space"
         onKeyDown={(k) => assess(k.key)}
         tabIndex={0}
+        autofocus
         >
-            {Prompt}
-            <button onClick={() => Finish(true)}>Click</button>
-            {timer.current? <div className="Timer"><p>{renderCount/1000}s</p></div>: <></>}
-            <div className="Play-BG">
-                {prompt_array.map((C, index) => 
+            {timer.current? <div className="Timer"><p>{renderCount/1000}s</p></div>: <>{renderCount/1000}</>}
+            <div className='Game'>
+                {Prompt.map((C, index) => 
                     <Char
                     key={index}
                     activeState={activeIndex === index}
-                    correct={userInput.length > index? userInput[index] === C.letter  : null }
-                    letter={C.letter}
+                    correct={userInput.length > index? userInput[index] === C : null }
+                    letter={C}
                     />
                 )}
             </div>
