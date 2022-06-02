@@ -1,0 +1,40 @@
+.comment {
+	display: flex;
+	flex-direction: row;
+    border-width: 2px;
+	border-radius: 3px;
+	background-color: #363636;
+	margin-top: 8px;
+	margin-left: 8px;
+	margin-right: 8px;
+    height: 130px;
+}
+
+.commenter{
+    width: 120px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+	align-items: center;
+}
+
+.commenter-picture {
+    height: 80px;
+    width: 80px;
+    border-radius: 50px;
+}
+
+.text{
+    width: 630px;
+    font-size: 20px;
+
+}
+
+.date{
+    width: 140px;
+    font-size: small;
+    color: #929292;
+    display: block;
+	text-align: right;
+    margin: 5px;
+}
