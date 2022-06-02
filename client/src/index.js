@@ -13,18 +13,16 @@ import Profile from './routes/Profile.js';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-  <React.StrictMode>
-    <BrowserRouter>
-      <Routes>
-        <Route path = "/" element={<Home/>}/>
-        <Route path = "/play" element={<Play/>}/>
-        <Route path = "/register" element={<Register/>}/>
-        <Route path = "/login" element={<Login/>}/>
-        <Route path = "/rankings" element={<Rankings/>}/>
-        <Route path = "/profile/:username" element={<Profile/>}/>
-      </Routes>
-    </BrowserRouter>
-  </React.StrictMode>
+  <BrowserRouter>
+    <Routes>
+      <Route path = "/" element={<Home/>}/>
+      <Route path = "/play" element={<Play/>}/>
+      <Route path = "/register" element={<Register/>}/>
+      <Route path = "/login" element={<Login/>}/>
+      <Route path = "/rankings" element={<Rankings/>}/>
+      <Route path = "/profile/:username" element={<Profile/>}/>
+    </Routes>
+  </BrowserRouter>
 );
 
 // If you want to start measuring performance in your app, pass a function
