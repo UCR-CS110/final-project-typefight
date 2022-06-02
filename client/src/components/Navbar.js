@@ -2,7 +2,40 @@ import { Component } from "react";
 import "./Navbar.css";
 
 class Navbar extends Component {
+	logout(){
+		localStorage.removeItem('token');
+		localStorage.removeItem('username');
+		window.location.reload();
+	}
 	render() {
+		let token = localStorage.getItem('token');
+		let commentUsername = localStorage.getItem('username');
+		let signin;
+		let register;
+		let signout;
+		if(token!==undefined && token!==null){
+			signout=<li>
+						<button className="navbar-link navbar-link-blue" onClick={this.logout}>
+						Signout
+						</button>
+					</li>;
+			signin=<div/>;
+			register=<div/>;
+		}
+		else {
+			signin=<li>
+						<a href="/login" className="navbar-link navbar-link-blue">
+						Log In
+						</a>
+					</li>;
+			register=<li>
+						<a href="/register" className="navbar-link navbar-link-blue">
+						Sign Up
+						</a>
+					</li>;
+			signout=<div />;
+
+		}
 		return (
 		<nav className="navbar">
 			<ul className="navbar-items-left">
@@ -25,16 +58,9 @@ class Navbar extends Component {
 			</ul>
 			<ul className="navbar-items-right">
 				{/* TODO: Display login/signup or profile image conditionally based on if user is signed in.*/}
-				<li>
-					<a href="/register" className="navbar-link navbar-link-blue">
-					Sign Up
-					</a>
-				</li>
-				<li>
-					<a href="/login" className="navbar-link navbar-link-blue">
-					Log In
-					</a>
-				</li>
+				{signin}
+				{register}
+				{signout}
 			</ul>
 		</nav>
 	)};
