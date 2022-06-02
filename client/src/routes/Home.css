@@ -63,3 +63,7 @@
 .pink-button:hover {
 	background-color: #d4257c;
 }
+
+.gray-button{
+	background-color: gray;
+}

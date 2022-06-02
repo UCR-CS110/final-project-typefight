@@ -1,4 +1,5 @@
 const prompts = require('../models/Prompts');
+//const User = require('../models/User);
 
 // Temporary Default. Text from Pg.43 of 'To Mock A Mockingbird ...' By Raymond Smullyan. Neat Book.
 // Maybe replace this with a string of valid characters for testing
@@ -29,6 +30,11 @@ function getPrompt(request, response){
     });
 }
 
+function getResult(request, response){
+    console.log(request.body); //This may be double pinged. Can just remove `<React.stringmode>` from index.js to see only one ping
+}
+
 module.exports = {
-    getPrompt
+    getPrompt,
+    getResult
 };

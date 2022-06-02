@@ -9,6 +9,7 @@ const gameHandler = require('./handlers/game.js');
 const loginHandler = require('./handlers/login.js')
 const commentHandler = require('./handlers/comment.js')
 const followHandler = require('./handlers/follow.js')
+const rankingsHandler = require('./handlers/rankings.js')
 
 const app = express();
 const port = 8080;
@@ -29,6 +30,8 @@ mongoose.connect(db,//connect to db
 
 app.get('/getPrompt', gameHandler.getPrompt); // Would change url
 
+app.post('/postGameResults', gameHandler.getResult);
+
 app.post('/changePassword', loginHandler.changePassword);
 app.post('/validateLogin', loginHandler.validateLogin);
 app.post('/register', loginHandler.register);
@@ -42,5 +45,10 @@ app.get('/:profileOwner/comments', commentHandler.loadComments);
 
 app.post('/follow', followHandler.follow);
 app.get('/:profileOwner/getFollows', followHandler.getFollows);
+
+app.get('/rankingsByRank', rankingsHandler.rankingsByRank)
+app.get('/rankingsByByGamesPlayed', rankingsHandler.rankingsByGamesPlayed)
+app.get('/rankingsByAverageWPM', rankingsHandler.rankingsByAverageWPM)
+app.get('/rankingsByAverageAccuracy', rankingsHandler.rankingsByAverageAccuracy)
 
 app.listen(port, () => console.log(`Server listening on http://localhost:${port}`));
