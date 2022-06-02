@@ -20,7 +20,7 @@ function Profile() {
 	
 	// Load all of the comments for the current profile
 	useEffect(() => {
-		fetch(`http://localhost:8080/$roverdog/comments`)
+		fetch(`http://localhost:8080/${profileUsername}/comments`)
 			.then(response => response.json())
 			.then(data => setComments([...data]))
 			.catch(err => {
@@ -33,8 +33,8 @@ function Profile() {
 		console.log(token);
 		console.log(commentUsername);
 		commentBox = <form action="http://localhost:8080/addComment" method="POST">
-						<input type="hidden" name="profileOwner" value="roverdog"/>
-						<input type="hidden" name="commenter" value="roverdog"/>
+						<input type="hidden" name="profileOwner" value={profileUsername}/>
+						<input type="hidden" name="commenter" value={commentUsername}/>
 						<textarea type="text" name="text" className="comment-input" placeholder="Write a new comment..."/>
 						<input type="submit" className="button post-button blue-button" value="Post Comment"/>
 					</form>
