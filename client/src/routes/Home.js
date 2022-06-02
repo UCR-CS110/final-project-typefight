@@ -19,7 +19,8 @@ class Home extends Component {
 		let commentUsername = localStorage.getItem('username');
 		let prof;
 		if(token!==undefined && token!==null){
-			prof=<a href="profile/test"className="button small-button pink-button">Profile</a>
+			let profileUrl = "profile/" + commentUsername;
+			prof=<a href={profileUrl} className="button small-button pink-button">Profile</a>
 		}
 		else{
 			prof=<div className="button small-button gray-button">Profile</div>
