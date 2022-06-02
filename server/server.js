@@ -8,6 +8,7 @@ const cors = require('cors');
 const gameHandler = require('./handlers/game.js');
 const loginHandler = require('./handlers/login.js')
 const commentHandler = require('./handlers/comment.js')
+const rankingsHandler = require('./handlers/rankings.js')
 
 const app = express();
 const port = 8080;
@@ -41,5 +42,10 @@ app.post('/register', loginHandler.register);
 app.post('/addComment', commentHandler.addComment);
 
 app.get('/:profileOwner/comments', commentHandler.loadComments);
+
+app.get('/rankingsByRank', rankingsHandler.rankingsByRank)
+app.get('/rankingsByByGamesPlayed', rankingsHandler.rankingsByGamesPlayed)
+app.get('/rankingsByAverageWPM', rankingsHandler.rankingsByAverageWPM)
+app.get('/rankingsByAverageAccuracy', rankingsHandler.rankingsByAverageAccuracy)
 
 app.listen(port, () => console.log(`Server listening on http://localhost:${port}`));

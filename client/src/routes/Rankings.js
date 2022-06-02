@@ -1,39 +1,46 @@
-import { Component } from "react";
+import React, { useState, useEffect } from 'react';
 import './Rankings.css'
 import './Page.css'
 import Navbar from '../components/Navbar.js'
+import Ranking from '../components/Ranking.js'
 
-class Home extends Component {
-	/*
-	constructor(props) {
-		super(props)
-	}
-	*/
+function Rankings() {
+	const [rankings, setRankings] = useState([]);
+	const [sortByNumber, setSortByNumber] = useState(0);
 
-	render() {
-		return(
-			<body>
-				<Navbar/>
-				<div className="black-background content-wrapper">
-					<div className="sort-by-container">
-						<div className="sort-by-item">Sort by:</div>
-						<button className="sort-by-item sort-by-button">Rank</button>
-						<button className="sort-by-item sort-by-button">Games Played</button>
-						<button className="sort-by-item sort-by-button">WPM</button>
-						<button className="sort-by-item sort-by-button">Accuracy</button>
-					</div>
-					<div className="rankings-headings">
-						<div>Rankings</div>
-						<div>Games Played</div>
-						<div>WPM</div>
-						<div>Accuracy</div>
-					</div>
-					<div className="rankings-container">
+	useEffect(() => {
+		fetch('http://localhost:8080/rankingsByRank')
+		  .then((res) => res.json())
+		  .then((data) => setRankings([...data]))
+	  }, []);
 
-					</div>
+
+	return(
+		<body>
+			<Navbar/>
+			<div className="black-background content-wrapper">
+				<div className="sort-by-container">
+					<div className="sort-by-item">Sort by:</div>
+					<button className="sort-by-item sort-by-button">Rank</button>
+					<button className="sort-by-item sort-by-button">Games Played</button>
+					<button className="sort-by-item sort-by-button">WPM</button>
+					<button className="sort-by-item sort-by-button">Accuracy</button>
 				</div>
-			</body>
-	)}
+				<div className="rankings-headings">
+					<div>Rankings</div>
+					<div>Games Played</div>
+					<div>WPM</div>
+					<div>Accuracy</div>
+				</div>
+				<div className="rankings-container">
+					{rankings.map((ranking, index) => {
+						return <Ranking rank={index + 1} username={ranking.username} gamesPlayed={ranking.gamesPlayed}
+							averageWPM={ranking.averageWPM} averageAccuracy={ranking.averageAccuracy}/>
+					})}
+				</div>
+			</div>
+		</body>
+	)
 }
 
-export default Home
+export default Rankings
