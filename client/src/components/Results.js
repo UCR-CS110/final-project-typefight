@@ -5,6 +5,7 @@ const Results = ({Retry, Stats}) => {
     useEffect(() => {
         let Send = Stats;
         let token = localStorage.getItem('token');
+        let sessionUsername = localStorage.getItem('username');
 	    Send.username = localStorage.getItem('username');
 
         if (token !== undefined && token !== null){
@@ -17,7 +18,7 @@ const Results = ({Retry, Stats}) => {
 
                 body: JSON.stringify(Send)
             })
-            .then( (res) => {console.log(res)})
+            .then(fetch(`http://localhost:8080/${sessionUsername}/updateStats`))
             .catch( (err) => {console.log("An error occured with submitting game results.", err)});
         }
     },[]);

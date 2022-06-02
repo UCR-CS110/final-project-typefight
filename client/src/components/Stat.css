@@ -1,0 +1,9 @@
+.stats {
+    display: flex;
+    flex-direction: column;
+}
+
+.games-played {
+    width: 230px;
+    margin: 10px;
+}

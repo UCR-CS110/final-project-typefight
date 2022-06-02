@@ -1,5 +1,5 @@
 const prompts = require('../models/Prompts');
-//const User = require('../models/User);
+const User = require('../models/User');
 
 const Game = require("../models/Game.js");
 
@@ -46,7 +46,50 @@ function postResult(req, response){
 		.catch(err => console.log("Error when adding game ", err))
 }
 
+function updateStats(req, res) {
+    let username = req.params.username
+    username = username.replace('$', '')
+    let numGames = 0;
+    let averageAccuracy = 0;
+    let averageWPM = 0;
+    let rankScore = 0;
+    // Query the 50 most recent games for a given user
+    Game.find({username: username}).sort({$natural:-1}).limit(50).lean().then(games => {
+        games.forEach(game => {
+            numGames++;
+			averageAccuracy += game.accuracy;
+            averageWPM += game.WPM;
+		});
+        averageAccuracy = averageAccuracy/numGames;
+        averageWPM = averageWPM/numGames;
+        rankScore = averageWPM * averageAccuracy
+
+        //Update the user's game data based on the 50 most recent games
+        User.updateOne({username: username},
+        {
+            $set: {
+                averageAccuracy: averageAccuracy,
+                averageWPM: averageWPM,
+                gamesPlayed: numGames,
+                rankScore: rankScore
+            }
+        }).then(console.log("Stats have been updated"))
+            .catch(err => console.log("Error when updating stats ", err))
+    });
+}
+
+async function getStats(req,res) {
+	// fetch all of the follows for this profile
+	let username = req.params.username;
+	username = username.replace('$', '')
+	User.find({username: username}).lean().then(user => {
+		res.json(user)
+	});
+}
+
 module.exports = {
     getPrompt,
-    postResult
+    postResult,
+    updateStats,
+    getStats
 };
