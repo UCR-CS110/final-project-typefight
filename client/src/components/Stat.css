@@ -4,6 +4,28 @@
 }
 
 .games-played {
-    width: 230px;
-    margin: 10px;
+    display: flex;
+    justify-content: right;
+	align-items: center;
+    width: 350px;
+    margin: 5px;
+}
+
+.main-stats {
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    font-size: 26px;
+    height: 50px;
+}
+
+.rank-score {
+    margin-left: 15px;
+    width: 150px;
+}
+
+.wpm {
+    display: flex;
+    align-items: center;
+    margin-left: 20px;
 }
