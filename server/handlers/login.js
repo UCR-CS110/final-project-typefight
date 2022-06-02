@@ -5,6 +5,7 @@ const JWT_SECRET="jsdjfsjfksdfjhsdjfhdsfkjsdhf87879837937987*&&%^$%$^&^&^&^ksjhf
 const fs = require('fs');
 
 const User = require("../models/User.js");
+const res = require('express/lib/response');
 //const Token = require("../models/Token.js");
 
 // -- Handlers --
@@ -109,11 +110,25 @@ async function register(req, res){
 async function addToken(request, response){
 
 }
-
-async function validateToken(request, response){
-
-}
 */
+async function validateToken(request, response){
+	const {clientToken } = req.body
+	const reguser = await User.findOne({username}).lean();
+	const token = jwt.sign(
+		{
+			id: reguser._id,
+			username: reguser.username
+		},
+		JWT_SECRET
+	)
+	if(token==clientToken){
+		return res.json({status: "true"})
+	}
+	else{
+		return res.json({status: "false"})
+	}
+}
+
 
 module.exports = {
     changePassword,
