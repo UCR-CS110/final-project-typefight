@@ -25,6 +25,7 @@ function Rankings() {
 		await fetch('http://localhost:8080/rankingsByRank')
 			.then((res) => res.json())
 			.then((data) => setRankings([...data]))
+			.catch((error) => console.log(error));
 		// once the request is sent, update state again
 		if (isMounted.current) // only update if we are still mounted
 			setIsSending(false)
@@ -39,6 +40,7 @@ function Rankings() {
 		await fetch('http://localhost:8080/rankingsByGamesPlayed')
 			.then((res) => res.json())
 			.then((data) => setRankings([...data]))
+			.catch((error) => console.log(error));
 		// once the request is sent, update state again
 		if (isMounted.current) // only update if we are still mounted
 			setIsSending(false)
@@ -53,6 +55,7 @@ function Rankings() {
 		await fetch('http://localhost:8080/rankingsByAverageWPM')
 			.then((res) => res.json())
 			.then((data) => setRankings([...data]))
+			.catch((error) => console.log(error));
 		// once the request is sent, update state again
 		if (isMounted.current) // only update if we are still mounted
 			setIsSending(false)
@@ -67,10 +70,18 @@ function Rankings() {
 		await fetch('http://localhost:8080/rankingsByAverageAccuracy')
 			.then((res) => res.json())
 			.then((data) => setRankings([...data]))
+			.catch((error) => console.log(error));
 		// once the request is sent, update state again
 		if (isMounted.current) // only update if we are still mounted
 			setIsSending(false)
 	}, [isSending]) // update the callback if the state changes
+
+	useEffect(() => {
+		fetch('http://localhost:8080/rankingsByRank')
+			.then((res) => res.json())
+			.then((data) => setRankings([...data]))
+			.catch((error) => console.log(error));
+	}, []);
 	  
 
 	return(
@@ -79,13 +90,13 @@ function Rankings() {
 			<div className="black-background content-wrapper">
 				<div className="sort-by-container">
 					<div className="sort-by-item">Sort by:</div>
-					<button className="sort-by-item sort-by-button"
+					<button className="sort-by-button"
 						disabled={isSending} onClick={rankingsByRank}>Rank</button>
-					<button className="sort-by-item sort-by-button"
+					<button className="sort-by-button"
 						disabled={isSending} onClick={rankingsByGamesPlayed}>Games Played</button>
-					<button className="sort-by-item sort-by-button"
+					<button className="sort-by-button"
 						disabled={isSending} onClick={rankingsByAverageWPM}>WPM</button>
-					<button className="sort-by-item sort-by-button"
+					<button className="sort-by-button"
 						disabled={isSending} onClick={rankingsByAverageAccuracy}>Accuracy</button>
 				</div>
 				<div className="rankings-headings">

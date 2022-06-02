@@ -26,14 +26,20 @@ button {
 	font-size: larger;
 }
 
-.sort-by-button:focus {
-	text-decoration: underline;
-	color: rgb(233, 233, 233)
+.sort-by-button {
+	margin-left: 10px;
+	margin-right: 10px;
+	font-size: larger;
 }
 
 .sort-by-button:hover {
 	text-decoration: underline;
-	cursor:pointer;
+	cursor: pointer;
+}
+
+.sort-by-button:focus {
+	text-decoration: underline;
+	color: rgb(233, 233, 233)
 }
 
 .rankings-headings {
