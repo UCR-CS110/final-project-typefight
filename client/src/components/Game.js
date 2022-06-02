@@ -16,7 +16,6 @@ const validateState = (k) => {
 
 const buildResults = (TotalTyped, Prompt, UserInput, CountDown) => {
     let Result = {Total: TotalTyped};
-    console.log("Test ", TotalTyped, Prompt, UserInput, CountDown);
     Result.Correct = Prompt.reduce((numCrrt, c, index) => {
         if (index > UserInput.length)
             return numCrrt;
@@ -41,7 +40,6 @@ const Game = ({Prompt, Finish, Report}) => {
 
     // Builds a results json and finishes the game; rendering the results component
     const closeGame = () => {
-        console.log(TOTAL);
         if(timer.current)
             clearInterval(timer.current);
         let results = buildResults(TOTAL, Prompt, userInput, countDown.current);
@@ -69,7 +67,7 @@ const Game = ({Prompt, Finish, Report}) => {
                     }, 100);
                 }
 
-                console.log("valid");
+                //console.log("valid");
                 setUI(userInput + key);
                 setAI(activeIndex + 1);
                 setTotal(TOTAL + 1);
@@ -77,17 +75,17 @@ const Game = ({Prompt, Finish, Report}) => {
                     closeGame();
                 break;
             case(1): 
-                console.log("backspace");
+                //console.log("backspace");
                 if(activeIndex !== 0){
                     setUI(userInput.slice(0,-1));
                     setAI(activeIndex - 1);
                 }
                 break;
             case(2): 
-                console.log("control");
+                //console.log("control");
                 break;
             default: 
-                console.log("invalid");
+                //console.log("invalid");
                 break;
         };
     }
