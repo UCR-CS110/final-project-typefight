@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import PropTypes from 'prop-types';
 import "./Login.css";
+import "./Page.css";
 import Navbar from '../components/Navbar.js'
 import {
   useNavigate
@@ -53,6 +54,7 @@ export default function Login({setToken}){
     return(
       <div>
       <Navbar />
+      <div className='content-wrapper2'>
       <div className="login-wrapper">
         <h1>Please Log In</h1>
         <form onSubmit={handleSubmit}>
@@ -65,10 +67,11 @@ export default function Login({setToken}){
             <input type="password" onChange={e => setPassword(e.target.value)} />
           </label>
           <div>
-            <button type="submit">Login</button>
+            <button type="submit" className='button2 small-button2 pink-button2'>Login</button>
           </div>
  
         </form>
+      </div>
       </div>
       </div>
     )

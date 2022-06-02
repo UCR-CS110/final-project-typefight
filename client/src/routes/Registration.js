@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import PropTypes from 'prop-types';
 import "./Registration.css";
+import "./Page.css"
 import Navbar from '../components/Navbar.js'
 import {
   useNavigate
@@ -52,9 +53,10 @@ export default function Register({setToken}){
     return(
       <div>
       <Navbar />
+      <div className='content-wrapper'>
       <div className="login-wrapper">
         <h1>Please Register</h1>
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit} className='center-wrapper'>
           <label>
             <p>Username</p>
             <input type="text" onChange={e => setUser(e.target.value)} />
@@ -64,9 +66,11 @@ export default function Register({setToken}){
             <input type="password" onChange={e => setPassword(e.target.value)} />
           </label>
           <div>
-            <button type="submit">Register</button>
+            <button type="submit" className='button1 small-button1 pink-button1'>Register</button>
           </div>
         </form>
+        
+      </div>
       </div>
       </div>
     )
