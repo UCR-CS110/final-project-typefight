@@ -102,12 +102,12 @@ function Profile() {
 				<div className="row">
 					<div className="container follower-container">
 							<div className="row">
-								<u className="header">Followers</u>
+								<u className="header">Following</u>
 								{followButton}
 							</div>
 							<div className="follower-grid">
 								{followers.map(follower => {
-									return <Follow follower={follower.follower}/>
+									return <Follow follower={follower.profileOwner}/>
 								})}
 							</div>
 					</div>
