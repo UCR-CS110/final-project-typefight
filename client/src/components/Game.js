@@ -25,7 +25,7 @@ const buildResults = (TotalTyped, Prompt, UserInput, CountDown) => {
     Result.Miss = UserInput.length - Result.Correct;
     Result.TimeMS = startingTime - CountDown;
     Result.Acc = !UserInput.length? 0 : (Result.Correct / UserInput.length) ;
-    Result.WPM = ((Result.Correct / 4.7) / Result.TimeMS) * 1000;
+    Result.WPM = (Result.Correct / 4.7) / (Result.TimeMS/60000);
     return Result;
 };
 
