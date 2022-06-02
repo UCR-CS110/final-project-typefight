@@ -1,6 +1,8 @@
 const prompts = require('../models/Prompts');
 //const User = require('../models/User);
 
+const Game = require("../models/Game.js");
+
 // Temporary Default. Text from Pg.43 of 'To Mock A Mockingbird ...' By Raymond Smullyan. Neat Book.
 // Maybe replace this with a string of valid characters for testing
 const defaultPrompt = "On the next day I came across a native who said: \"My father once said that he and I are different types, one a knight and one a knave.\" Is it possible that his father really said that?";
@@ -30,11 +32,21 @@ function getPrompt(request, response){
     });
 }
 
-function getResult(request, response){
-    console.log(request.body); //This may be double pinged. Can just remove `<React.stringmode>` from index.js to see only one ping
+function postResult(req, response){
+    const game = new Game({
+		username: req.body.username,
+        total: req.body.Total,
+        correct: req.body.Correct,
+        miss: req.body.Miss,
+        time: req.body.TimeMS,
+        accuracy: req.body.Acc,
+        WPM: req.body.WPM
+	})
+	game.save().then(console.log("Game has been added"))
+		.catch(err => console.log("Error when adding game ", err))
 }
 
 module.exports = {
     getPrompt,
-    getResult
+    postResult
 };

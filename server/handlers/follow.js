@@ -1,8 +1,7 @@
 const Follow = require("../models/Follow.js");
 
 async function follow(req, res) {
-    //TODO: Verify the follow data
-
+	
 	const follow = new Follow({
 		profileOwner: req.body.profileOwner,
         follower: req.body.follower

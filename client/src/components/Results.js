@@ -4,18 +4,22 @@ const Results = ({Retry, Stats}) => {
 
     useEffect(() => {
         let Send = Stats;
-        Send.username = "TestUserName";
-        fetch("http://localhost:8080/postGameResults", {
-            method: "POST",
-            headers: {
-                'Accep': 'application/json',
-                'Content-Type': 'application/json'
-            },
+        let token = localStorage.getItem('token');
+	    Send.username = localStorage.getItem('username');
 
-            body: JSON.stringify(Send)
-        })
-        .then( (res) => {console.log(res)})
-        .catch( (err) => {console.log("An error occured with submitting game results.", err)});
+        if (token !== undefined && token !== null){
+            fetch("http://localhost:8080/postGameResults", {
+                method: "POST",
+                headers: {
+                    'Accep': 'application/json',
+                    'Content-Type': 'application/json'
+                },
+
+                body: JSON.stringify(Send)
+            })
+            .then( (res) => {console.log(res)})
+            .catch( (err) => {console.log("An error occured with submitting game results.", err)});
+        }
     },[]);
 
     return (
