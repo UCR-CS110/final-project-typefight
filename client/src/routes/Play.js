@@ -26,10 +26,11 @@ const Play = () => {
         setResults(blank);
     }
 
+
     return(
         <div>
             <Navbar/>
-            {!done? <Game Prompt={prompt} Finish={setDone} Report={setResults}/> : <Results Retry={Retry} Stats={results}/>}
+            {!done? <Game Prompt={prompt.split("")} Finish={setDone} Report={setResults}/> : <Results Retry={Retry} Stats={results}/>}
         </div>
     )
 }
