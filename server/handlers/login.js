@@ -88,7 +88,10 @@ async function register(req, res){
 		await User.create({
 			username,
 			password,
-			gamesPlayed:0
+			gamesPlayed: 0,
+			averageWPM: 0,
+			averageAccuracy: 0,
+			rankScore: 0
 		})
 	}catch(error) {
 		console.log("ERROR: " + error);
