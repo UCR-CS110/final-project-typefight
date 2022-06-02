@@ -6,6 +6,10 @@ import Ranking from '../components/Ranking.js'
 
 function Rankings() {
 	const [rankings, setRankings] = useState([]);
+	const [sortByRank, setSortByRank] = useState("active-sort-by-button");
+	const [sortByGamesPlayed, setSortByGamesPlayed] = useState("sort-by-button");
+	const [sortByWPM, setSortByWPM] = useState("sort-by-button");
+	const [sortByAccuracy, setSortByAccuracy] = useState("sort-by-button");
 	const [isSending, setIsSending] = useState(false);
 	const isMounted = useRef(true);
 
@@ -17,6 +21,10 @@ function Rankings() {
 	}, [])
 
 	const rankingsByRank = useCallback(async () => {
+		setSortByRank("active-sort-by-button");
+		setSortByGamesPlayed("sort-by-button");
+		setSortByWPM("sort-by-button");
+		setSortByAccuracy("sort-by-button");
 		// don't send again while we are sending
 		if (isSending) return
 		// update state
@@ -32,6 +40,10 @@ function Rankings() {
 	}, [isSending]) // update the callback if the state changes
 
 	const rankingsByGamesPlayed = useCallback(async () => {
+		setSortByRank("sort-by-button");
+		setSortByGamesPlayed("active-sort-by-button");
+		setSortByWPM("sort-by-button");
+		setSortByAccuracy("sort-by-button");
 		// don't send again while we are sending
 		if (isSending) return
 		// update state
@@ -47,6 +59,10 @@ function Rankings() {
 	}, [isSending]) // update the callback if the state changes
 
 	const rankingsByAverageWPM = useCallback(async () => {
+		setSortByRank("sort-by-button");
+		setSortByGamesPlayed("sort-by-button");
+		setSortByWPM("active-sort-by-button");
+		setSortByAccuracy("sort-by-button");
 		// don't send again while we are sending
 		if (isSending) return
 		// update state
@@ -62,6 +78,10 @@ function Rankings() {
 	}, [isSending]) // update the callback if the state changes
 
 	const rankingsByAverageAccuracy = useCallback(async () => {
+		setSortByRank("sort-by-button");
+		setSortByGamesPlayed("sort-by-button");
+		setSortByWPM("sort-by-button");
+		setSortByAccuracy("active-sort-by-button");
 		// don't send again while we are sending
 		if (isSending) return
 		// update state
@@ -90,13 +110,13 @@ function Rankings() {
 			<div className="black-background content-wrapper">
 				<div className="sort-by-container">
 					<div className="sort-by-item">Sort by:</div>
-					<button className="sort-by-button"
+					<button className={sortByRank}
 						disabled={isSending} onClick={rankingsByRank}>Rank</button>
-					<button className="sort-by-button"
+					<button className={sortByGamesPlayed}
 						disabled={isSending} onClick={rankingsByGamesPlayed}>Games Played</button>
-					<button className="sort-by-button"
+					<button className={sortByWPM}
 						disabled={isSending} onClick={rankingsByAverageWPM}>WPM</button>
-					<button className="sort-by-button"
+					<button className={sortByAccuracy}
 						disabled={isSending} onClick={rankingsByAverageAccuracy}>Accuracy</button>
 				</div>
 				<div className="rankings-headings">

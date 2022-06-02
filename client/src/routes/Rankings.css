@@ -37,7 +37,10 @@ button {
 	cursor: pointer;
 }
 
-.sort-by-button:focus {
+.active-sort-by-button {
+	margin-left: 10px;
+	margin-right: 10px;
+	font-size: larger;
 	text-decoration: underline;
 	color: rgb(233, 233, 233)
 }
