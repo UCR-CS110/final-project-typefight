@@ -12,9 +12,9 @@ async function follow(req, res) {
 
 async function getFollows(req,res) {
 	// fetch all of the follows for this profile
-	let profileOwner = req.params.profileOwner;
-	profileOwner = profileOwner.replace('$', '')
-	Follow.find({profileOwner: profileOwner}).lean().then(follows => {
+	let follower = req.params.profileOwner;
+	follower = follower.replace('$', '')
+	Follow.find({follower: follower}).lean().then(follows => {
 		res.json(follows)
 	});
 }
