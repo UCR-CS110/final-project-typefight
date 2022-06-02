@@ -1,4 +1,5 @@
 import { useState, useRef } from 'react'
+import './Game.css'
 import Char from './Char.js'
 
 const validLetters = " abcdefghijklmnopqrstuvwxyz.,:!$%&()<>=?\"'-;0123456789";
@@ -95,9 +96,9 @@ const Game = ({Prompt, Finish, Report}) => {
         className="Game-Space"
         onKeyDown={(k) => assess(k.key)}
         tabIndex={0}
-        autofocus
+        autofocus="true"
         >
-            {timer.current? <div className="Timer"><p>{renderCount/1000}s</p></div>: <>{renderCount/1000}</>}
+            <div className="Timer"> {renderCount/1000}s </div>
             <div className='Game'>
                 {Prompt.map((C, index) => 
                     <Char

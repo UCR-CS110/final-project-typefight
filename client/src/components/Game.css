@@ -1,0 +1,13 @@
+.Game-Space {
+    position: absolute;
+    background-color: #222;
+    top: 35%;
+    width: auto;
+    margin: 0% 10%;
+    padding: 5%;
+}
+
+.Timer {
+    color: rgb(255, 204, 0);
+    font-size: 1.75em;
+}
