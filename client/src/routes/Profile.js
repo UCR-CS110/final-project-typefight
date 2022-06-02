@@ -2,13 +2,18 @@ import { useParams } from "react-router-dom";
 import React, { useState, useEffect } from 'react';
 import './Profile.css'
 import './Page.css'
-import Navbar from '../components/Navbar.js'
+
 import DefaultImage from '../images/default-profile-picture.png'
+
 import Comment from '../components/Comment.js'
+import Navbar from '../components/Navbar.js'
+import Follow from '../components/Follow.js'
+
 
 function Profile() {
 
 	const [comments, setComments] = useState([]);
+	const [followers, setFollowers] = useState([]);
 
 	let params = useParams();
 	
@@ -18,6 +23,16 @@ function Profile() {
 	let profileUsername = params.username;
 	let commentBox;
 	let followButton;
+
+	// Load all of the followers for the current profile
+	useEffect(() => {
+		fetch(`http://localhost:8080/${profileUsername}/getFollows`)
+			.then(response => response.json())
+			.then(data => setFollowers([...data]))
+			.catch(err => {
+				console.log("Error when rendering followers", err);
+			})
+	}, []);
 	
 	// Load all of the comments for the current profile
 	useEffect(() => {
@@ -62,8 +77,15 @@ function Profile() {
 				</div>
 				<div className="row">
 					<div className="container follower-container">
-						<u className="header">Followers</u>
-						{followButton}
+							<div className="row">
+								<u className="header">Followers</u>
+								{followButton}
+							</div>
+							<div className="follower-grid">
+								{followers.map(follower => {
+									return <Follow follower={follower.follower}/>
+								})}
+							</div>
 					</div>
 					<div className="column">
 						<div className="container stats-container">

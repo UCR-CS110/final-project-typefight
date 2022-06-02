@@ -41,6 +41,6 @@ app.post('/addComment', commentHandler.addComment);
 app.get('/:profileOwner/comments', commentHandler.loadComments);
 
 app.post('/follow', followHandler.follow);
-app.get('/getFollows', followHandler.getFollows);
+app.get('/:profileOwner/getFollows', followHandler.getFollows);
 
 app.listen(port, () => console.log(`Server listening on http://localhost:${port}`));
