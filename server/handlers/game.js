@@ -39,7 +39,7 @@ function postResult(req, response){
         correct: req.body.Correct,
         miss: req.body.Miss,
         time: req.body.TimeMS,
-        accuracy: req.body.Acc,
+        accuracy: (req.body.Acc * 100),
         WPM: req.body.WPM
 	})
 	game.save().then(console.log("Game has been added"))
@@ -60,7 +60,7 @@ function updateStats(req, res) {
 			averageAccuracy += game.accuracy;
             averageWPM += game.WPM;
 		});
-        averageAccuracy = averageAccuracy/numGames;
+        averageAccuracy = (averageAccuracy/numGames);
         averageWPM = averageWPM/numGames;
         rankScore = averageWPM * averageAccuracy
 

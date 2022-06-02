@@ -102,7 +102,10 @@ function Profile() {
 					<div className="column">
 						<div className="container stats-container">
 							{stats.map(stat => {
-								return <Stat gamesPlayed={stat.gamesPlayed} rankScore={stat.rankScore} averageWPM={stat.averageWPM} averageAccuracy={stat.averageAccuracy}/>
+								return <Stat gamesPlayed={stat.gamesPlayed}
+									rankScore={Math.trunc(stat.rankScore)}
+									averageWPM={Math.trunc(stat.averageWPM)}
+									averageAccuracy={Math.trunc(stat.averageAccuracy)}/>
 							})}
 						</div>
 						<div className="container recent-games-container">
