@@ -1,6 +1,5 @@
 import { useState, useRef } from 'react'
 import Char from './Char.js'
-import Timer from './Timer.js' // I hate react
 
 const validLetters = " abcdefghijklmnopqrstuvwxyz.,:!$%&()<>=?\"'-;0123456789";
 const control = "Enter Shift Tab Control";
@@ -42,6 +41,8 @@ const Game = ({Prompt, Finish, Report}) => {
 
     // Builds a results json and finishes the game; rendering the results component
     const closeGame = () => {
+        if(timer.current)
+            clearInterval(timer.current);
         let results = buildResults(TOTAL, prompt_array, userInput, countDown.current);
         Report(results);
         Finish(true);
@@ -53,37 +54,36 @@ const Game = ({Prompt, Finish, Report}) => {
             case(0):
                 if(!timer.current){ // move somewhere else
                     timer.current = setInterval(() => {
-                        //console.log(countDown.current);
                         countDown.current = countDown.current - 100;
                         setRC(countDown.current);
                         if(countDown.current === 0){
                             clearInterval(timer.current);
                             timer.current = 0;
-                            console.log("Killed Timer");
+                            countDown.current = startingTime;
+                            //console.log("Killed Timer");
                             //closeGame(); //userInput and TOTAL aren't being updated here
                         }
                     }, 100);
                 }
-                console.log("valid");
+                //console.log("valid");
                 setUI(userInput + key);
                 setAI(activeIndex + 1);
                 setTotal(TOTAL + 1);
-                if(userInput.length === prompt_array.length) // not quite the same?
+                if(userInput.length+1 === prompt_array.length) // not quite the same?
                     closeGame();
-                //console.log(userInput);
                 break;
             case(1): 
-                console.log("backspace");
+                //console.log("backspace");
                 if(activeIndex !== 0){
                     setUI(userInput.slice(0,-1));
                     setAI(activeIndex - 1);
                 }
                 break;
             case(2): 
-                console.log("control");
+                //console.log("control");
                 break;
             default: 
-                console.log("invalid");
+                //console.log("invalid");
                 break;
         };
     }
@@ -96,6 +96,7 @@ const Game = ({Prompt, Finish, Report}) => {
         >
             {Prompt}
             <button onClick={() => Finish(true)}>Click</button>
+            {timer.current? <div className="Timer">{renderCount/1000}s</div>: <></>}
             <div className="Play-BG">
                 {prompt_array.map((C, index) => 
                     <Char
@@ -106,7 +107,6 @@ const Game = ({Prompt, Finish, Report}) => {
                     />
                 )}
             </div>
-            {timer.current? <p>{renderCount/1000}s</p>: <></>}
         </div>
     )
 };

@@ -6,3 +6,7 @@
 .ActiveChar {
     border-left: 1px solid green;
 }
+
+.NullChar { color: white; }
+.CorrectChar { color: skyblue; }
+.WrongChar { color: red; }

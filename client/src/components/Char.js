@@ -3,20 +3,23 @@ import "./Char.css"
 
 const Char = ({activeState, correct, letter}) => {
     //const [correct, isCorrect] = useState(correctState);
-    let color;
+    //let color;
+    let classes = "Char";
     if(correct === null) 
-        color = {color: 'white'}; 
+        classes += " NullChar";//color = {color: 'white'}; 
     else if (correct === true)
-        color = {color: 'skyblue'};
+        classes += " CorrectChar";//color = {color: 'skyblue'};
     else{
-        color = {color: 'red'};
+        classes += " WrongChar";//color = {color: 'red'};
         if(letter === " ")
             letter = "_";
     }
 
+    if(activeState)
+        classes += " ActiveChar";
+
     return (
-        <div className={activeState? "Char ActiveChar" : "Char"}
-            style={color}>
+        <div className={classes}>
             <p>{letter}</p>
         </div>
     );
