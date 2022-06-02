@@ -5,8 +5,9 @@ const mongoose = require('mongoose');
 const config = require('config');
 const cors = require('cors');
 
-const gameHandlers = require('./handlers/game.js');
-const loginHandlers = require('./handlers/login.js')
+const gameHandler = require('./handlers/game.js');
+const loginHandler = require('./handlers/login.js')
+const commentHandler = require('./handlers/comment.js')
 
 const app = express();
 const port = 8080;
@@ -25,16 +26,20 @@ mongoose.connect(db,//connect to db
         console.log("Connected to MongoDB");
     });
 
-app.get('/getPrompt', gameHandlers.getPrompt); // Would change url
+app.get('/getPrompt', gameHandler.getPrompt); // Would change url
 
-app.post('/changePassword', loginHandlers.changePassword);
+app.post('/changePassword', loginHandler.changePassword);
 
-app.post('/validateLogin', loginHandlers.validateLogin);
+app.post('/validateLogin', loginHandler.validateLogin);
 
-app.post('/register', loginHandlers.register)
+app.post('/register', loginHandler.register);
 
 //app.post('/addToken', loginHandlers.addToken);
 
 //app.get('/validateToken/:token', loginHandlers.validateToken);
+
+app.post('/addComment', commentHandler.addComment);
+
+app.get('/:profileOwner/comments', commentHandler.loadComments);
 
 app.listen(port, () => console.log(`Server listening on http://localhost:${port}`));
