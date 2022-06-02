@@ -1,12 +1,17 @@
 .Char {
     display: inline-block;
     min-width: .3em;
+    min-height: 1.75em;
 }
   
-.ActiveChar {
-    border-left: 1px solid green;
+.ActiveChar p, .ActiveChar-Space {
+    border-left: 3px solid rgb(255, 204, 0);
 }
 
-.NullChar { color: white; }
+.NullChar { color: rgba(255, 255, 255, 0.641); }
 .CorrectChar { color: skyblue; }
 .WrongChar { color: red; }
+
+.Char p {
+    font-size: 1.75em;
+}

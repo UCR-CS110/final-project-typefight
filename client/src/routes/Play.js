@@ -21,8 +21,8 @@ const Play = () => {
         });
     }, []);
 
-    const Retry = () => {
-        setDone(false);
+    const Retry = (bool) => {
+        setDone(!bool);
         setResults(blank);
     }
 
@@ -30,7 +30,9 @@ const Play = () => {
     return(
         <div>
             <Navbar/>
+            <div className="Play-Container">
             {!done? <Game Prompt={prompt.split("")} Finish={setDone} Report={setResults}/> : <Results Retry={Retry} Stats={results}/>}
+            </div>
         </div>
     )
 }

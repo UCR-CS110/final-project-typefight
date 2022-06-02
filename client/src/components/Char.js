@@ -1,22 +1,22 @@
-//import { useState } from 'react'
 import "./Char.css"
 
 const Char = ({activeState, correct, letter}) => {
-    //const [correct, isCorrect] = useState(correctState);
-    //let color;
     let classes = "Char";
     if(correct === null) 
-        classes += " NullChar";//color = {color: 'white'}; 
+        classes += " NullChar"; 
     else if (correct === true)
-        classes += " CorrectChar";//color = {color: 'skyblue'};
+        classes += " CorrectChar";
     else{
-        classes += " WrongChar";//color = {color: 'red'};
+        classes += " WrongChar";
         if(letter === " ")
             letter = "_";
     }
 
-    if(activeState)
+    if(activeState){
         classes += " ActiveChar";
+        if(letter === " ")
+            classes += " ActiveChar-Space";
+    }
 
     return (
         <div className={classes}>

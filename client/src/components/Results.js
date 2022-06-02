@@ -1,4 +1,5 @@
 import { useEffect } from "react";
+import './Results.css'
 
 const Results = ({Retry, Stats}) => {
 
@@ -24,11 +25,19 @@ const Results = ({Retry, Stats}) => {
     },[]);
 
     return (
-        <div>
-            Results
-            <button onClick={() => Retry(false)}>Click</button>
-            <br/>
-            <p>{console.log(Stats)}{JSON.stringify(Stats)}</p>
+        <div className="Results">
+            <h2>Results</h2>
+            <div className="SpaceApart">
+                <h3>WPM: {Math.floor(Stats.WPM)}</h3>
+                <h3>ACC: {Math.floor(Stats.Acc*100)}%</h3>
+            </div>
+            <div>
+                <p>Total Characters: {Stats.Correct + Stats.Miss}</p>
+                <p>Characters Missed: {Stats.Miss}</p>
+                <p>Time Taken: {Stats.TimeMS / 1000} Seconds</p>
+            </div>
+            <button className="Btn-Blue"
+                    onClick={() => Retry(true)}>Retry</button>
         </div>
     )
 };

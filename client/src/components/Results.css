@@ -1,0 +1,51 @@
+.Results {
+    position: absolute;
+    top: 20%;
+    display: flex;
+    flex-direction: column;
+    justify-self: center;
+    align-self: center;
+    background-color: #222;
+    margin: 0 auto;
+    padding: 3%;
+    border-radius: 10px;
+
+    font-size: 1.9em;
+    font-weight: 600;
+    letter-spacing: 2px;
+
+    min-width: 600px;
+}
+
+.Results h2 {
+    text-decoration: underline;
+    font-size: 1.75em;
+}
+
+.Results h3 {
+    font-size: 1.40em;
+}
+
+.Results h2, h3, p {
+    margin: 3% 0%;
+}
+
+.SpaceApart {
+    display: inline-flex;
+    justify-content: space-between;
+}
+
+.Results button {
+    justify-self: center;
+    margin: auto;
+    height: 2em;
+    width: 5em;
+    border-radius: 7px;
+    font-size: 1.50em;
+    font-weight: 600;
+    letter-spacing: 7px;
+}
+
+.Btn-Blue {
+    background-color: #07AAE1;
+}
