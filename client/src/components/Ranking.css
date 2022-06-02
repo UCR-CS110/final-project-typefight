@@ -1,3 +1,9 @@
+.profile-ref {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+}
+
 .ranking {
 	display: flex;
 	flex-direction: horizontal;
@@ -11,42 +17,44 @@
 	font-weight: bold;
 }
 
-.rank {
-	width:35px;
+.ranking-rank {
+	width: 35px;
 	margin-left: 15px;
 	margin-right: 15px;
 }
 
-.picture {
+.ranking-picture {
 	height: 70px;
     width: 70px;
     border-radius: 50px;
 }
 
-.username {
+.ranking-username {
+	display: flex;
+	justify-content: left;
 	width: 200px;
 	margin-left: 40px;
 }
 
-.rank-score {
+.ranking-rank-score {
 	display: flex;
 	justify-content: center;
 	width: 150px;
 }
 
-.games-played {
+.ranking-games-played {
 	display: flex;
 	justify-content: center;
 	width: 150px;
 }
 
-.average-wpm {
+.ranking-average-wpm {
 	display: flex;
 	justify-content: center;
 	width: 150px;
 }
 
-.average-accuracy {
+.ranking-average-accuracy {
 	display: flex;
 	justify-content: center;
 	width: 150px;
