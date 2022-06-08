@@ -1,8 +1,6 @@
-const bodyParser = require('body-parser');
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const JWT_SECRET="jsdjfsjfksdfjhsdjfhdsfkjsdhf87879837937987*&&%^$%$^&^&^&^ksjhfkdhfksdhkfjhdskfjhdsk";
-const fs = require('fs');
 
 const User = require("../models/User.js");
 const res = require('express/lib/response');
@@ -69,21 +67,20 @@ async function register(req, res){
 	const {username, password: plainTextPassword } = req.body
 	const user = await User.findOne({username}).lean();
 
-	if(!username || typeof username !== 'string'){
+	if (!username || typeof username !== 'string'){
 		return res.json({status:"error", error:"Invalid username"})
 	}
-
-	if(!plainTextPassword || typeof plainTextPassword !== "string") {
+	else if (!plainTextPassword || typeof plainTextPassword !== "string") {
 		return res.json({status:"error", error:"Invalid password"})
 	}
-	if (plainTextPassword.length < 4 ) {
+	else if (plainTextPassword.length < 4 ) {
 		return res.json({status:"error", error:"Password is too short"})
 	}
-	if(user){
+	else if (user){
 		return res.json({status: 'error', error: 'Username already exists'})
 	}
 	const password = await bcrypt.hash(plainTextPassword, 10)
-	// TODO: Fix this try block to throw error if username is a duplicate
+
 	try{
 		await User.create({
 			username,
@@ -95,7 +92,7 @@ async function register(req, res){
 		})
 	}catch(error) {
 		console.log("ERROR: " + error);
-		return res.json({status:"error"})
+		return res.json({status: "error"})
 	}
 	const reguser = await User.findOne({username}).lean();
 	const token = jwt.sign(
@@ -110,20 +107,18 @@ async function register(req, res){
 
 async function validateToken(req, res){
 	const token = req.params.token;
-	console.log(token);
 	try {
 		const decode = jwt.verify(token, JWT_SECRET);
 		console.log(decode);
 		return res.json({
 			login: true,
-			data: decode
+			decode: decode
 		});
 	}
 	catch(error) {
-		console.log("Error:", error);
 		return res.json({
 			login: false,
-			data: 'error'
+			decode: 'error'
 		});
 	}
 }

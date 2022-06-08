@@ -19,16 +19,14 @@ function Profile() {
 	const [stats, setStats] = useState([]);
 	const [recentGames, setRecentGames] = useState([]);
 	const [validToken, setValidToken] = useState(false);
+	const [sessionUsername, setSessionUsername] = useState(null);
 
 	let params = useParams();
 	
 	let token = localStorage.getItem('token');
-	let sessionUsername = localStorage.getItem('username');
 	let profileUsername = params.username;
 	let commentBox;
 	let followButton;
-	console.log(token);
-	console.log(sessionUsername);
 
 	// Load all of the followers for the current profile
 	useEffect(() => {
@@ -71,18 +69,21 @@ function Profile() {
 	}, [profileUsername]);
 
 	useEffect(() => {
-		fetch(`http://localhost:8080/validateToken/${token}/${sessionUsername}`)
+		fetch(`http://localhost:8080/validateToken/${token}`)
 			.then(response => response.json())
 			.then(data => {
-				console.log(data);
-				setValidToken(data.login);
+				if(data.login) {
+					setValidToken(data.login);
+					setSessionUsername(data.decode.username);
+				}
 			})
 			.catch(err => {
 				console.log("Error when validating token:", err);
 			})
-	}, [sessionUsername, token]);
+	}, [token]);
 
 	if (validToken) {
+		console.log("login token valid");
 		// validate the login token
 		commentBox = <form action="http://localhost:8080/addComment" method="POST">
 						<input type="hidden" name="profileOwner" value={profileUsername}/>
