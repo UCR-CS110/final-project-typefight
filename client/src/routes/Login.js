@@ -3,7 +3,7 @@ import "./Login.css";
 import "./Page.css";
 import Navbar from '../components/Navbar.js'
 import {useNavigate} from "react-router-dom";
-import { useParams } from "react-router-dom";
+//import { useParams } from "react-router-dom";
 const bcrypt = require("bcryptjs");
 
 async function getPassHash(username){

@@ -19,7 +19,7 @@ async function loadComments(req,res) {
 	// fetch all of the comments for this profile
 	let profileOwner = req.params.profileOwner;
 	profileOwner = profileOwner.replace('$', '')
-	Comment.find({profileOwner: profileOwner}).lean().then(comments => {
+	Comment.find({profileOwner: profileOwner}).sort({$natural:-1}).lean().then(comments => {
 		res.json(comments)
 	});
 }
