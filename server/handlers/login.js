@@ -6,7 +6,6 @@ const fs = require('fs');
 
 const User = require("../models/User.js");
 const res = require('express/lib/response');
-//const Token = require("../models/Token.js");
 
 // -- Handlers --
 
@@ -20,7 +19,7 @@ async function changePassword(req, res){
 	if (plainTextPassword.length < 5) {
 		return res.json({
 			status: 'error',
-			error: 'Password too small. Should be atleast 6 characters'
+			error: 'Password too small. Should be at least 6 characters'
 		})
 	}
 
@@ -109,26 +108,23 @@ async function register(req, res){
 	return res.json({status:"ok", data:token});
 }
 
-/*
-async function addToken(request, response){
-
-}
-*/
-async function validateToken(request, response){
-	const {clientToken } = req.body
-	const reguser = await User.findOne({username}).lean();
-	const token = jwt.sign(
-		{
-			id: reguser._id,
-			username: reguser.username
-		},
-		JWT_SECRET
-	)
-	if(token==clientToken){
-		return res.json({status: "true"})
+async function validateToken(req, res){
+	const token = req.params.token;
+	console.log(token);
+	try {
+		const decode = jwt.verify(token, JWT_SECRET);
+		console.log(decode);
+		return res.json({
+			login: true,
+			data: decode
+		});
 	}
-	else{
-		return res.json({status: "false"})
+	catch(error) {
+		console.log("Error:", error);
+		return res.json({
+			login: false,
+			data: 'error'
+		});
 	}
 }
 
@@ -137,6 +133,5 @@ module.exports = {
     changePassword,
 	validateLogin,
 	register,
-	//addToken,
-	//validateToken
+	validateToken
 };

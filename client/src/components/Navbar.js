@@ -12,7 +12,6 @@ class Navbar extends Component {
 
 	render() {
 		let token = localStorage.getItem('token');
-		let commentUsername = localStorage.getItem('username');
 		let signin;
 		let register;
 		let signout;
