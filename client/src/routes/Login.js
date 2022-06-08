@@ -3,10 +3,29 @@ import "./Login.css";
 import "./Page.css";
 import Navbar from '../components/Navbar.js'
 import {useNavigate} from "react-router-dom";
+import { useParams } from "react-router-dom";
+const bcrypt = require("bcryptjs");
 
+async function getPassHash(username){
+
+  return fetch(`http://localhost:8080/getPasswordHash/${username}`)
+        .then((res=> res.json()))
+        .then( (hash)=>{
+          return hash.passwordHash;
+        })
+}
 
 async function loginUser(username, password){
-
+    const passHash= await getPassHash(username);
+    console.log(passHash);
+    console.log(username);
+    let passStatus;
+    if(await bcrypt.compare(password,passHash)){
+      passStatus=true;
+    }
+    else{
+      passStatus=false;
+    }
     return fetch('http://localhost:8080/validateLogin', {
         method: 'POST',
         headers: {
@@ -14,7 +33,7 @@ async function loginUser(username, password){
         },
         body: JSON.stringify({
             username,
-            password
+            passStatus
         })
     }).then((res) =>res.json())
     .then((token) => {

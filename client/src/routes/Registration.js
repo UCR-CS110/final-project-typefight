@@ -3,11 +3,22 @@ import "./Registration.css";
 import "./Page.css"
 import Navbar from '../components/Navbar.js'
 import {useNavigate} from "react-router-dom";
+const bcrypt = require("bcryptjs");
 
 
 
 async function registerUser(username, password){
     console.log(username);
+    const passwordHash = await bcrypt.hash(password, 10)
+    if (!username || typeof username !== 'string'){
+      return alert("Invalid username")
+    }
+    else if (!password || typeof password !== "string") {
+      return alert("Invalid password")
+    }
+    else if (password.length < 4 ) {
+      return alert("Password is too short")
+    }
     return fetch('http://localhost:8080/register', {
         method: 'POST',
         headers: {
@@ -15,7 +26,7 @@ async function registerUser(username, password){
         },
         body: JSON.stringify({
             username,
-            password
+            passwordHash
         })
     }).then((res) =>res.json())
       .then((token) => {

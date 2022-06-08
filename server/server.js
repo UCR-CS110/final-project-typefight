@@ -37,6 +37,7 @@ app.get('/:username/getRecentGames', gameHandler.getRecentGames);
 app.post('/changePassword', loginHandler.changePassword);
 app.post('/validateLogin', loginHandler.validateLogin);
 app.post('/register', loginHandler.register);
+app.get('/getPasswordHash/:username', loginHandler.getPasswordHash);
 app.get('/validateToken/:token', loginHandler.validateToken);
 
 app.post('/addComment', commentHandler.addComment);
