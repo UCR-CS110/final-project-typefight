@@ -6,6 +6,15 @@ const User = require("../models/User.js");
 const res = require('express/lib/response');
 
 // -- Handlers --
+async function getPasswordHash(req,res){
+	const username= req.params.username;
+	const user=await User.findOne({ username }).lean();
+	if (!user) {
+		return res.json({ status: 'error', error: 'Invalid username/password' })
+	}
+	return res.json({status: 'ok', passwordHash: user.password});
+}
+
 
 async function changePassword(req, res){
 	const { token, newpassword: plainTextPassword } = req.body
@@ -40,14 +49,14 @@ async function changePassword(req, res){
 }
 
 async function validateLogin(req, res){
-	const { username, password } = req.body
+	const { username, passStatus } = req.body
 	const user = await User.findOne({ username }).lean()
-
+	console.log(passStatus);
 	if (!user) {
 		return res.json({ status: 'error', error: 'Invalid username/password' })
 	}
 
-	if (await bcrypt.compare(password, user.password)) {
+	if (passStatus==true) {
 		// the username, password combination is successful
 		const token = jwt.sign(
 			{
@@ -64,27 +73,18 @@ async function validateLogin(req, res){
 
 async function register(req, res){
 
-	const {username, password: plainTextPassword } = req.body
+	const {username, passwordHash } = req.body
 	const user = await User.findOne({username}).lean();
 
-	if (!username || typeof username !== 'string'){
-		return res.json({status:"error", error:"Invalid username"})
-	}
-	else if (!plainTextPassword || typeof plainTextPassword !== "string") {
-		return res.json({status:"error", error:"Invalid password"})
-	}
-	else if (plainTextPassword.length < 4 ) {
-		return res.json({status:"error", error:"Password is too short"})
-	}
-	else if (user){
+	if (user){
 		return res.json({status: 'error', error: 'Username already exists'})
-	}
-	const password = await bcrypt.hash(plainTextPassword, 10)
+	  }
+	// const password = await bcrypt.hash(plainTextPassword, 10)
 
 	try{
 		await User.create({
 			username,
-			password,
+			password: passwordHash,
 			gamesPlayed: 0,
 			averageWPM: 0,
 			averageAccuracy: 0,
@@ -128,5 +128,6 @@ module.exports = {
     changePassword,
 	validateLogin,
 	register,
-	validateToken
+	validateToken,
+	getPasswordHash
 };
