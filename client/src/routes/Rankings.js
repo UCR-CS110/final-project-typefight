@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback, useRef } from 'react';
+import { useState, useEffect, useCallback, useRef } from 'react';
 import './Rankings.css'
 import './Page.css'
 import Navbar from '../components/Navbar.js'

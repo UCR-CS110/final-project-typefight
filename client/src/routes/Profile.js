@@ -1,7 +1,8 @@
 import { useParams } from "react-router-dom";
-import React, { useState, useEffect } from 'react';
-import './Profile.css'
-import './Page.css'
+import { useState, useEffect, useCallback} from 'react';
+import Modal from 'react-modal';
+import './Profile.css';
+import './Page.css';
 
 import DefaultImage from '../images/default-profile-picture.png'
 
@@ -11,6 +12,7 @@ import Follow from '../components/Follow.js'
 import Stat from '../components/Stat.js'
 import RecentGame from '../components/RecentGame.js'
 
+Modal.setAppElement("#root");
 
 function Profile() {
 
@@ -20,6 +22,7 @@ function Profile() {
 	const [recentGames, setRecentGames] = useState([]);
 	const [validToken, setValidToken] = useState(false);
 	const [sessionUsername, setSessionUsername] = useState(null);
+	const [pictureModal, setPictureModal] = useState(false);
 
 	let params = useParams();
 	
@@ -27,6 +30,14 @@ function Profile() {
 	let profileUsername = params.username;
 	let commentBox;
 	let followButton;
+
+	const openPictureModal = useCallback(async () => {
+		setPictureModal(true);
+	}, []);
+
+	const closePictureModal = useCallback(async () => {
+		setPictureModal(false);
+	}, []);
 
 	// Load all of the followers for the current profile
 	useEffect(() => {
@@ -107,9 +118,12 @@ function Profile() {
 	return(
 		<body>
 			<Navbar/>
+			<Modal isOpen={pictureModal} className="modal" contentLabel="Profile Picture Modal">
+				<button className="close-button" onClick={closePictureModal}>x</button>
+			</Modal>
 			<div className="content-wrapper">
 				<div className="container profile-owner-container">
-					<img src={DefaultImage} className="profile-picture" alt="user"/>
+					<img src={DefaultImage} className="profile-picture" alt="user" onClick={openPictureModal}/>
 					<div className="profile-owner-username">{profileUsername}</div>
 				</div>
 				<div className="row">
