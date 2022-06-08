@@ -1,54 +1,66 @@
-import { Component } from "react";
+import React, { useState, useEffect, useCallback } from 'react';
 import "./Navbar.css";
 
 
-class Navbar extends Component {
+function Navbar() {
+	const [validToken, setValidToken] = useState(false);
+	const [sessionUsername, setSessionUsername] = useState(null);
 
-	logout(){
+	let token = localStorage.getItem('token');
+	let signin;
+	let register;
+	let signout;
+	let profile;
+
+	const logout = useCallback(async () => {
 		localStorage.removeItem('token');
-		localStorage.removeItem('username');
 		window.location.reload();
+	}, []);
+
+	useEffect(() => {
+		fetch(`http://localhost:8080/validateToken/${token}`)
+			.then(response => response.json())
+			.then(data => {
+				if(data.login) {
+					setValidToken(data.login);
+					setSessionUsername(data.decode.username);
+				}
+			})
+			.catch(err => {
+				console.log("Error when validating token:", err);
+			})
+	}, [token]);
+	
+	if(validToken){
+		signout=<li>
+					<button className="navbar-link navbar-link-blue" onClick={logout}>
+					Signout
+					</button>
+				</li>;
+		profile=<li>
+			<a href={`/profile/${sessionUsername}`} className="navbar-link navbar-link-blue">
+					{sessionUsername}
+					</a>
+		</li>
+		signin=<div/>;
+		register=<div/>;
 	}
-
-	render() {
-		let token = localStorage.getItem('token');
-		let commentUsername = localStorage.getItem('username');
-		let signin;
-		let register;
-		let signout;
-		let prof;
-		let user=localStorage.getItem('username');
-		
-		if(token!==undefined && token!==null){
-			signout=<li>
-						<button className="navbar-link navbar-link-blue" onClick={this.logout}>
-						Signout
-						</button>
-					</li>;
-			prof=<li>
-				<a href={`/profile/${user}`} className="navbar-link navbar-link-blue">
-						{user}
-						</a>
-			</li>
-			signin=<div/>;
-			register=<div/>;
-		}
-		else {
-			signin=<li>
-						<a href="/login" className="navbar-link navbar-link-blue">
-						Log In
-						</a>
-					</li>;
-			register=<li>
-						<a href="/register" className="navbar-link navbar-link-blue">
-						Sign Up
-						</a>
-					</li>;
-			prof=<div />;
-			signout=<div />;
-
-		}
-		return (
+	else {
+		profile=<div />;
+		signout=<div />;
+		signin=<li>
+					<a href="/login" className="navbar-link navbar-link-blue">
+					Log In
+					</a>
+				</li>;
+		register=<li>
+					<a href="/register" className="navbar-link navbar-link-blue">
+					Sign Up
+					</a>
+				</li>;
+	}
+	
+	return (
 		<nav className="navbar">
 			<ul className="navbar-items-left">
 				<li>
@@ -72,11 +84,11 @@ class Navbar extends Component {
 				{/* TODO: Display login/signup or profile image conditionally based on if user is signed in.*/}
 				{signin}
 				{register}
-				{prof}
+				{profile}
 				{signout}
 			</ul>
 		</nav>
-	)};
-};
+	)
+}
 
 export default Navbar;

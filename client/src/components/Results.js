@@ -1,15 +1,29 @@
-import { useEffect } from "react";
+import { useState, useEffect } from "react";
 import './Results.css'
 
 const Results = ({Retry, Stats}) => {
+    const [validToken, setValidToken] = useState(false);
+	const [sessionUsername, setSessionUsername] = useState(null);
+    let Send = Stats;
+    const token = localStorage.getItem('token');
 
     useEffect(() => {
-        let Send = Stats;
-        let token = localStorage.getItem('token');
-        let sessionUsername = localStorage.getItem('username');
-	    Send.username = localStorage.getItem('username');
+		fetch(`http://localhost:8080/validateToken/${token}`)
+			.then(response => response.json())
+			.then(data => {
+				if(data.login) {
+					setValidToken(data.login);
+					setSessionUsername(data.decode.username);
+				}
+			})
+			.catch(err => {
+				console.log("Error when validating token:", err);
+			})
+	}, [token]);
 
-        if (token !== undefined && token !== null){
+    useEffect(() => {
+        if (validToken){
+            Send.username = sessionUsername;
             fetch("http://localhost:8080/postGameResults", {
                 method: "POST",
                 headers: {
@@ -20,9 +34,9 @@ const Results = ({Retry, Stats}) => {
                 body: JSON.stringify(Send)
             })
             .then(fetch(`http://localhost:8080/${sessionUsername}/updateStats`))
-            .catch( (err) => {console.log("An error occured with submitting game results.", err)});
+            .catch( (err) => {console.log("Error when submitting game results:", err)});
         }
-    },[]);
+    },[Send, sessionUsername, validToken]);
 
     return (
         <div className="Results">

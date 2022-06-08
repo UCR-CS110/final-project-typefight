@@ -18,12 +18,12 @@ function Profile() {
 	const [followers, setFollowers] = useState([]);
 	const [stats, setStats] = useState([]);
 	const [recentGames, setRecentGames] = useState([]);
+	const [validToken, setValidToken] = useState(false);
+	const [sessionUsername, setSessionUsername] = useState(null);
 
 	let params = useParams();
 	
 	let token = localStorage.getItem('token');
-	let sessionUsername = localStorage.getItem('username');
-	// TODO: react v6 deprecated this notation to get route params. I will have to change this to a functional component.
 	let profileUsername = params.username;
 	let commentBox;
 	let followButton;
@@ -34,9 +34,9 @@ function Profile() {
 			.then(response => response.json())
 			.then(data => setFollowers([...data]))
 			.catch(err => {
-				console.log("Error when rendering followers", err);
+				console.log("Error when rendering followers:", err);
 			})
-	}, []);
+	}, [profileUsername]);
 	
 	// Load all of the comments for the current profile
 	useEffect(() => {
@@ -44,9 +44,9 @@ function Profile() {
 			.then(response => response.json())
 			.then(data => setComments([...data]))
 			.catch(err => {
-				console.log("Error when rendering comments", err);
+				console.log("Error when rendering comments:", err);
 			})
-	}, []);
+	}, [profileUsername]);
 
 	// Load the stats for the current profile
 	useEffect(() => {
@@ -54,9 +54,9 @@ function Profile() {
 			.then(response => response.json())
 			.then(data => setStats(data))
 			.catch(err => {
-				console.log("Error when rendering stats", err);
+				console.log("Error when rendering stats:", err);
 			})
-	}, []);
+	}, [profileUsername]);
 
 	// Load the recent games for the current profile
 	useEffect(() => {
@@ -64,14 +64,27 @@ function Profile() {
 			.then(response => response.json())
 			.then(data => setRecentGames(data))
 			.catch(err => {
-				console.log("Error when rendering recent games", err);
+				console.log("Error when rendering recent games:", err);
 			})
-	}, []);
+	}, [profileUsername]);
 
-	if (token !== undefined && token !== null) {
+	useEffect(() => {
+		fetch(`http://localhost:8080/validateToken/${token}`)
+			.then(response => response.json())
+			.then(data => {
+				if(data.login) {
+					setValidToken(data.login);
+					setSessionUsername(data.decode.username);
+				}
+			})
+			.catch(err => {
+				console.log("Error when validating token:", err);
+			})
+	}, [token]);
+
+	if (validToken) {
+		console.log("login token valid");
 		// validate the login token
-		//console.log(token);
-		//console.log(sessionUsername);
 		commentBox = <form action="http://localhost:8080/addComment" method="POST">
 						<input type="hidden" name="profileOwner" value={profileUsername}/>
 						<input type="hidden" name="commenter" value={sessionUsername}/>
@@ -86,7 +99,7 @@ function Profile() {
 						</form>
 	}
 	else {
-		console.log("no login token");
+		console.log("login token not valid");
 		commentBox = <div/>;
 		followButton = <div/>;
 	}

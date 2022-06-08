@@ -6,7 +6,6 @@ function rankingsByRank(req, res){
 		users.forEach(user => {
 			delete user["password"];
 		});
-		console.log(users);
 		res.json(users)
 	});
 }
@@ -17,7 +16,6 @@ function rankingsByGamesPlayed(req, res){
 		users.forEach(user => {
 			delete user["password"];
 		});
-		console.log(users);
 		res.json(users)
 	});
 }
@@ -28,7 +26,6 @@ function rankingsByAverageWPM(req, res){
 		users.forEach(user => {
 			delete user["password"];
 		});
-		console.log(users);
 		res.json(users)
 	});
 }
@@ -39,7 +36,6 @@ function rankingsByAverageAccuracy(req, res){
 		users.forEach(user => {
 			delete user["password"];
 		});
-		console.log(users);
 		res.json(users)
 	});
 }
