@@ -4,12 +4,15 @@ const path = require('path');
 const mongoose = require('mongoose');
 const config = require('config');
 const cors = require('cors');
+const multer = require('multer');
 
+const upload = multer({dest: 'handlers/uploads/'}).single('file');
 const gameHandler = require('./handlers/game.js');
-const loginHandler = require('./handlers/login.js')
-const commentHandler = require('./handlers/comment.js')
-const followHandler = require('./handlers/follow.js')
-const rankingsHandler = require('./handlers/rankings.js')
+const loginHandler = require('./handlers/login.js');
+const commentHandler = require('./handlers/comment.js');
+const followHandler = require('./handlers/follow.js');
+const rankingsHandler = require('./handlers/rankings.js');
+const imageHandler = require('./handlers/image.js');
 
 const app = express();
 const port = 8080;
@@ -45,9 +48,12 @@ app.get('/:profileOwner/comments', commentHandler.loadComments);
 app.post('/follow', followHandler.follow);
 app.get('/:profileOwner/getFollows', followHandler.getFollows);
 
-app.get('/rankingsByRank', rankingsHandler.rankingsByRank)
-app.get('/rankingsByGamesPlayed', rankingsHandler.rankingsByGamesPlayed)
-app.get('/rankingsByAverageWPM', rankingsHandler.rankingsByAverageWPM)
-app.get('/rankingsByAverageAccuracy', rankingsHandler.rankingsByAverageAccuracy)
+app.get('/rankingsByRank', rankingsHandler.rankingsByRank);
+app.get('/rankingsByGamesPlayed', rankingsHandler.rankingsByGamesPlayed);
+app.get('/rankingsByAverageWPM', rankingsHandler.rankingsByAverageWPM);
+app.get('/rankingsByAverageAccuracy', rankingsHandler.rankingsByAverageAccuracy);
+
+app.post('/:username/updateProfilePicture/', upload, imageHandler.updateProfilePicture);
+app.get('/:username/getProfileImage', imageHandler.getProfilePicture);
 
 app.listen(port, () => console.log(`Server listening on http://localhost:${port}`));

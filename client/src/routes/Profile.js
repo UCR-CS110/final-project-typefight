@@ -11,6 +11,7 @@ import Navbar from '../components/Navbar.js'
 import Follow from '../components/Follow.js'
 import Stat from '../components/Stat.js'
 import RecentGame from '../components/RecentGame.js'
+import FileUpload from '../components/FileUpload.js'
 
 Modal.setAppElement("#root");
 
@@ -22,6 +23,7 @@ function Profile() {
 	const [recentGames, setRecentGames] = useState([]);
 	const [validToken, setValidToken] = useState(false);
 	const [sessionUsername, setSessionUsername] = useState(null);
+
 	const [pictureModal, setPictureModal] = useState(false);
 
 	let params = useParams();
@@ -120,6 +122,7 @@ function Profile() {
 			<Navbar/>
 			<Modal isOpen={pictureModal} className="modal" contentLabel="Profile Picture Modal">
 				<button className="close-button" onClick={closePictureModal}>x</button>
+				<FileUpload sessionUsername={sessionUsername}/>
 			</Modal>
 			<div className="content-wrapper">
 				<div className="container profile-owner-container">

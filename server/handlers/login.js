@@ -54,7 +54,8 @@ async function validateLogin(req, res){
 				id: user._id,
 				username: user.username
 			},
-			JWT_SECRET
+			JWT_SECRET,
+			{ expiresIn: '2h'} // expires in 2 hours
 		)
 		return res.json({ status: 'ok', data: token })
 	}
@@ -100,7 +101,8 @@ async function register(req, res){
 			id: reguser._id,
 			username: reguser.username
 		},
-		JWT_SECRET
+		JWT_SECRET,
+		{ expiresIn: '2h'} // expires in 2 hours
 	)
 	return res.json({status:"ok", data:token});
 }
@@ -109,7 +111,7 @@ async function validateToken(req, res){
 	const token = req.params.token;
 	try {
 		const decode = jwt.verify(token, JWT_SECRET);
-		console.log(decode);
+		//console.log(decode);
 		return res.json({
 			login: true,
 			decode: decode
