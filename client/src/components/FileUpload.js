@@ -1,5 +1,6 @@
 import { useState } from "react";
 import axios from 'axios';
+import ProfilePicture from "./ProfilePicture";
 
 export default function FileUpload(props) {
 	const [file, setFile] = useState(undefined)
@@ -23,7 +24,7 @@ export default function FileUpload(props) {
 			}
 		};
 		axios.post(url, formData, config).then(res => {
-			//Now do what you want with the response;
+			window.location.reload(false);
 		})
 	}
 
@@ -38,6 +39,7 @@ export default function FileUpload(props) {
 			</div>
 		
 			<h1>Uploaded Image</h1>
+			<ProfilePicture username={props.sessionUsername}/>
 		</div>
 	)
 }

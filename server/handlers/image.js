@@ -4,9 +4,8 @@ const path = require('path');
 
 async function getProfilePicture(req, res) {
 	username = req.params.username;
-	User.findOne({username: username}).lean()
+	User.findOne({username: username})
 	.then( user => {
-		console.log(user);
 		let profilePicture = user.profilePicture;
         return res.json({profilePicture: profilePicture});
 	}).catch(error => {
@@ -22,8 +21,7 @@ async function updateProfilePicture(req, res) {
 		data: fs.readFileSync(path.join(__dirname + '/uploads/' + req.file.filename)),
 		contentType: 'image/png'
 	}
-	console.log(profilePicture);
-	console.log(username);
+	
 	User.updateOne({username: username},
 	{
 		$set: {

@@ -4,14 +4,13 @@ import Modal from 'react-modal';
 import './Profile.css';
 import './Page.css';
 
-import DefaultImage from '../images/default-profile-picture.png'
-
 import Comment from '../components/Comment.js'
 import Navbar from '../components/Navbar.js'
 import Follow from '../components/Follow.js'
 import Stat from '../components/Stat.js'
 import RecentGame from '../components/RecentGame.js'
 import FileUpload from '../components/FileUpload.js'
+import ProfilePicture from '../components/ProfilePicture.js'
 
 Modal.setAppElement("#root");
 
@@ -126,7 +125,9 @@ function Profile() {
 			</Modal>
 			<div className="content-wrapper">
 				<div className="container profile-owner-container">
-					<img src={DefaultImage} className="profile-picture" alt="user" onClick={openPictureModal}/>
+					<div className="profile-picture-container" onClick={openPictureModal}>
+						<ProfilePicture username={profileUsername}/>
+					</div>
 					<div className="profile-owner-username">{profileUsername}</div>
 				</div>
 				<div className="row">

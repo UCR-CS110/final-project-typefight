@@ -3,7 +3,8 @@ const jwt = require("jsonwebtoken");
 const JWT_SECRET="jsdjfsjfksdfjhsdjfhdsfkjsdhf87879837937987*&&%^$%$^&^&^&^ksjhfkdhfksdhkfjhdskfjhdsk";
 
 const User = require("../models/User.js");
-const res = require('express/lib/response');
+const fs = require('fs');
+const path = require('path');
 
 // -- Handlers --
 
@@ -82,6 +83,11 @@ async function register(req, res){
 	}
 	const password = await bcrypt.hash(plainTextPassword, 10)
 
+	let profilePicture = {
+		data: fs.readFileSync(path.join(__dirname + '/uploads/default-profile-picture.png')),
+		contentType: 'image/png'
+	}
+
 	try{
 		await User.create({
 			username,
@@ -89,7 +95,8 @@ async function register(req, res){
 			gamesPlayed: 0,
 			averageWPM: 0,
 			averageAccuracy: 0,
-			rankScore: 0
+			rankScore: 0,
+			profilePicture: profilePicture
 		})
 	}catch(error) {
 		console.log("ERROR: " + error);
