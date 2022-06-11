@@ -21,19 +21,19 @@ Users can socially interact with each other through profile pages, and for the c
     <br>
     If Users are logged in, they can easily access their profiles here. Otherwise, the NavBar allows them to make an account.
 
-    > \< Home Page Image\>
+    ![Home Page](https://drive.google.com/file/d/11j0RlLb19vMZyvfHUkLsaQURnwmQnhJK/view?usp=sharing)
 
 - ### Game
     Users are presented with a prompt randomly selected by the backend server. They are tasked with trying to type out most of the prompt as they can while under a certain time limit. Current implementation has set the time limit to 30s. The game ends if either the prompt is completely typed or if the time reaches 0. Results are then displayed and sent to the server.
 
-    > \< Game Page Image > \< Maybe even append the results page to the image>
+    ![Game Page](https://drive.google.com/file/d/17-Wub5jxF9E9xpDuGa16r8M0tr974cGv/view?usp=sharing)
 
 - ### Profile
     Information about a particular user is presented here. The user's profile picture and username are at the top. Social interaction is done here through posting comments and following users. Game related information is also presented here like recent games and stats.
     > \< Profile page image>
 - ### Log-in/Sign-up
     If a user already has an account, they can simply provide their username and password. However, if they do not have one, they can easily sign up for one by again providing a unique username and a password.
-    > \< Log-in / Sign-up Page Images>
+    ![Login SignUp](https://drive.google.com/file/d/1T7IOX4lmY1wAHyb1ipYkxf4qxfDzYu0H/view?usp=sharing)
 - ### Rankings
     A global leaderboard; users are listed based on different sorting criterias. Users are presented with their profile pictures, usernames, and four stats. The sorting criterias sort based on either of these four stats which are:
     - Rank
