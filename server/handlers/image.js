@@ -15,7 +15,6 @@ async function getProfilePicture(req, res) {
 
 async function updateProfilePicture(req, res) {
 	let username = req.params.username;
-	console.log(req.file);
 	
 	let profilePicture = {
 		data: fs.readFileSync(path.join(__dirname + '/uploads/' + req.file.filename)),
@@ -34,8 +33,6 @@ async function updateProfilePicture(req, res) {
 	.catch(err => {
 		console.log("Error when updating profile picture:", err);
 	})
-
-	
 }
 
 module.exports = {

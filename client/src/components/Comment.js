@@ -1,13 +1,13 @@
-//import React, {useState} from 'react';
-import DefaultImage from '../images/default-profile-picture.png'
 import "./Comment.css"
-
+import ProfilePicture from './ProfilePicture.js'
 
 export default function Comment(props){
     return(
       <div className="comment">
           <a href={props.commenter} className="commenter">
-            <img src={DefaultImage} className="commenter-picture" alt="user"/>
+            <div className="commenter-profile-picture-container">
+				      <ProfilePicture username={props.commenter}/>
+				    </div>
             <div className="commenter-username">{props.commenter}</div>
           </a>
           <p className="text">{props.text}</p>
