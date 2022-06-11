@@ -107,7 +107,7 @@ button {
 
 .header {
 	display: block;
-	width: 60%;
+	width: 100%;
 	font-size: 25px;
 	text-align: left;
 	margin: 10px;
@@ -122,13 +122,25 @@ button {
 	height: 80px;
   }
 
+.button {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	border-style: none;
+	border-radius: 5px;
+	border-color: #000000;
+	text-decoration: none;
+	letter-spacing: 5px;
+	margin: 20px auto;
+	font-weight: bold;
+}
+
 .follow-button {
 	height: 30px;
 	font-size: 20px;
 	width: 150px;
-	margin: 10px auto;
-	margin-left: 1000px;
-	display: flex;
+	margin: 10px;
+	margin-left: 170px;
 }
 
 .post-button {

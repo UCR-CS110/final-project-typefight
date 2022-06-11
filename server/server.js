@@ -45,7 +45,6 @@ app.get('/validateToken/:token', loginHandler.validateToken);
 
 app.post('/addComment', commentHandler.addComment);
 app.get('/:profileOwner/comments', commentHandler.loadComments);
-app.delete('/deleteComment/:commentId', commentHandler.deleteComment);
 
 app.post('/follow', followHandler.follow);
 app.get('/:profileOwner/getFollows', followHandler.getFollows);
