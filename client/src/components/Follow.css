@@ -15,6 +15,9 @@ a {
 .follower-profile-picture-container {
     width: 100px;
 	height: 100px;
+    display: flex;
+    flex-direction: column;
+	align-items: center;
 }
 
 .follower-username {
