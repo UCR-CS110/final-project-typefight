@@ -34,7 +34,7 @@ Users can socially interact with each other through profile pages, and for the c
 - ### Log-in/Sign-up
     If a user already has an account, they can simply provide their username and password. However, if they do not have one, they can easily sign up for one by again providing a unique username and a password.
     
-    ![Login SignUp](https://knowyourmeme.com/memes/doge "Test")
+    ![Login SignUp](https://wompampsupport.azureedge.net/fetchimage?siteId=7575&v=2&jpgQuality=100&width=700&url=https%3A%2F%2Fi.kym-cdn.com%2Fentries%2Ficons%2Fmobile%2F000%2F013%2F564%2Fdoge.jpg "Test")
 
 - ### Rankings
     A global leaderboard; users are listed based on different sorting criterias. Users are presented with their profile pictures, usernames, and four stats. The sorting criterias sort based on either of these four stats which are:
