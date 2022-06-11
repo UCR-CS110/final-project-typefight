@@ -21,20 +21,22 @@ Users can socially interact with each other through profile pages, and for the c
     <br>
     If Users are logged in, they can easily access their profiles here. Otherwise, the NavBar allows them to make an account.
 
-    ![Home Page](https://drive.google.com/file/d/11j0RlLb19vMZyvfHUkLsaQURnwmQnhJK/view?usp=sharing)
+    ![Home Page](https://drive.google.com/uc?export=view&id=11j0RlLb19vMZyvfHUkLsaQURnwmQnhJK "Home")
 
 - ### Game
     Users are presented with a prompt randomly selected by the backend server. They are tasked with trying to type out most of the prompt as they can while under a certain time limit. Current implementation has set the time limit to 30s. The game ends if either the prompt is completely typed or if the time reaches 0. Results are then displayed and sent to the server.
 
-    ![Game Page](https://drive.google.com/file/d/17-Wub5jxF9E9xpDuGa16r8M0tr974cGv/view?usp=sharing)
+    ![Game Page](https://drive.google.com/uc?export=view&id=17-Wub5jxF9E9xpDuGa16r8M0tr974cGv "Game")
 
 - ### Profile
     Information about a particular user is presented here. The user's profile picture and username are at the top. Social interaction is done here through posting comments and following users. Game related information is also presented here like recent games and stats.
-    > \< Profile page image>
+
+    ![Profile Page](https://drive.google.com/uc?export=view&id=1xW8_4HAlKlHoPrZI61j8YCf0tiW4fnux "Profile")
+
 - ### Log-in/Sign-up
     If a user already has an account, they can simply provide their username and password. However, if they do not have one, they can easily sign up for one by again providing a unique username and a password.
     
-    ![Login SignUp](https://wompampsupport.azureedge.net/fetchimage?siteId=7575&v=2&jpgQuality=100&width=700&url=https%3A%2F%2Fi.kym-cdn.com%2Fentries%2Ficons%2Fmobile%2F000%2F013%2F564%2Fdoge.jpg "Test")
+    ![Login SignUp](https://drive.google.com/uc?export=view&id=1T7IOX4lmY1wAHyb1ipYkxf4qxfDzYu0H "LoginSignup")
 
 - ### Rankings
     A global leaderboard; users are listed based on different sorting criterias. Users are presented with their profile pictures, usernames, and four stats. The sorting criterias sort based on either of these four stats which are:
@@ -43,7 +45,7 @@ Users can socially interact with each other through profile pages, and for the c
     - Words Per Minute (WPM)
     - Accuracy
     
-    > \< Rankings Page Image>
+    ![Rankings Page](https://drive.google.com/uc?export=view&id=1J_omI_AbyyoYN9lMV1U3tmwf_ZHnb9Y0 "Rankings")
 
 <hr>
 
