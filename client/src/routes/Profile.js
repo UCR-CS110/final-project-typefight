@@ -1,16 +1,18 @@
 import { useParams } from "react-router-dom";
-import React, { useState, useEffect } from 'react';
-import './Profile.css'
-import './Page.css'
-
-import DefaultImage from '../images/default-profile-picture.png'
+import { useState, useEffect, useCallback} from 'react';
+import Modal from 'react-modal';
+import './Profile.css';
+import './Page.css';
 
 import Comment from '../components/Comment.js'
 import Navbar from '../components/Navbar.js'
 import Follow from '../components/Follow.js'
 import Stat from '../components/Stat.js'
 import RecentGame from '../components/RecentGame.js'
+import FileUpload from '../components/FileUpload.js'
+import ProfilePicture from '../components/ProfilePicture.js'
 
+Modal.setAppElement("#root");
 
 function Profile() {
 
@@ -21,12 +23,23 @@ function Profile() {
 	const [validToken, setValidToken] = useState(false);
 	const [sessionUsername, setSessionUsername] = useState(null);
 
+	const [pictureModal, setPictureModal] = useState(false);
+
 	let params = useParams();
 	
 	let token = localStorage.getItem('token');
 	let profileUsername = params.username;
 	let commentBox;
 	let followButton;
+
+	const openPictureModal = useCallback(async () => {
+		if (sessionUsername === profileUsername)
+			setPictureModal(true);
+	}, [profileUsername, sessionUsername]);
+
+	const closePictureModal = useCallback(async () => {
+		setPictureModal(false);
+	}, []);
 
 	// Load all of the followers for the current profile
 	useEffect(() => {
@@ -103,13 +116,25 @@ function Profile() {
 		commentBox = <div/>;
 		followButton = <div/>;
 	}
+
+	let profilePictureContainer = "profile-picture-container";
+	if (sessionUsername === profileUsername)
+	{
+		profilePictureContainer = "profile-picture-container-highlight"
+	}
 		
 	return(
 		<body>
 			<Navbar/>
+			<Modal isOpen={pictureModal} className="modal" contentLabel="Profile Picture Modal">
+				<button className="close-button" onClick={closePictureModal}>x</button>
+				<FileUpload sessionUsername={sessionUsername}/>
+			</Modal>
 			<div className="content-wrapper">
 				<div className="container profile-owner-container">
-					<img src={DefaultImage} className="profile-picture" alt="user"/>
+					<div className={profilePictureContainer} onClick={openPictureModal}>
+						<ProfilePicture username={profileUsername}/>
+					</div>
 					<div className="profile-owner-username">{profileUsername}</div>
 				</div>
 				<div className="row">

@@ -23,10 +23,9 @@
 	margin-right: 15px;
 }
 
-.ranking-picture {
+.ranking-profile-picture-container {
 	height: 70px;
     width: 70px;
-    border-radius: 50px;
 }
 
 .ranking-username {
