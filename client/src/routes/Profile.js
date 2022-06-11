@@ -10,6 +10,7 @@ import Navbar from '../components/Navbar.js'
 import Follow from '../components/Follow.js'
 import Stat from '../components/Stat.js'
 import RecentGame from '../components/RecentGame.js'
+import PostBox from '../components/PostBox.js'
 
 
 function Profile() {
@@ -85,12 +86,7 @@ function Profile() {
 	if (validToken) {
 		console.log("login token valid");
 		// validate the login token
-		commentBox = <form action="http://localhost:8080/addComment" method="POST">
-						<input type="hidden" name="profileOwner" value={profileUsername}/>
-						<input type="hidden" name="commenter" value={sessionUsername}/>
-						<textarea type="text" name="text" className="comment-input" placeholder="Write a new comment..."/>
-						<input type="submit" className="button post-button blue-button" value="Post Comment"/>
-					</form>
+		commentBox = <PostBox profileOwner={profileUsername} commenter={sessionUsername}/>
 
 		followButton = <form action="http://localhost:8080/follow" method="POST">
 							<input type="hidden" name="profileOwner" value={profileUsername}/>
@@ -150,7 +146,7 @@ function Profile() {
 					<u className="header">Comments</u>
 					{commentBox}
 					{comments.map(comment => {
-						return <Comment commenter={comment.commenter} text={comment.text} date={comment.date}/>
+						return <Comment commentId = {comment._id} commenter={comment.commenter} text={comment.text} date={comment.date}/>
 					})}
 				</div>
 			</div>
