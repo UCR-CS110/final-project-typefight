@@ -25,11 +25,25 @@ function getPrompt(request, response){
 
     prompts.find({ id: index }).then(item => {
         //console.log(`Prompt Requested. Sent P.${index}`);
-        response.send({prompt: item[0].Prompt});
+        response.send({prompt: item[0].Prompt, id: index});
     }).catch( () => {
         console.error("! An error has occurred with getPrompt. Sending default Text.");
-        response.send({prompt: defaultPrompt});
+        response.send({prompt: defaultPrompt, id: -1});
     });
+}
+
+function ratePrompt(req, response){
+    prompts.findOneAndUpdate({id: req.body.PromptID}, 
+        {
+            $inc: {
+                rating: req.body.inc
+            }
+        })
+        .then(response.status(200))
+        .catch((err) => {
+            console.log(`Error when updating rating for Prompt ${req.body.PromptID}`, err)
+            response.status(500);
+        });
 }
 
 function postResult(req, response){
@@ -98,6 +112,7 @@ async function getRecentGames(req,res) {
 
 module.exports = {
     getPrompt,
+    ratePrompt,
     postResult,
     updateStats,
     getStats,

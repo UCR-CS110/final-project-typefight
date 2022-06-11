@@ -10,6 +10,10 @@ const PromptSchema = new Schema ({
     id:{
         type: Number,
         required: false
+    },
+    rating:{
+        type: Number,
+        required: false
     }
 });
 
