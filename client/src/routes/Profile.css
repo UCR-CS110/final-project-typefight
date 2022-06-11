@@ -89,7 +89,12 @@ button {
 	height: 100px;
 }
 
-.profile-picture-container:hover {
+.profile-picture-container-highlight {
+	width: 100px;
+	height: 100px;
+}
+
+.profile-picture-container-highlight:hover {
 	cursor: pointer;
 	-webkit-filter: brightness(70%);
 }

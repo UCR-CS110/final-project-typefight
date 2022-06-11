@@ -33,8 +33,9 @@ function Profile() {
 	let followButton;
 
 	const openPictureModal = useCallback(async () => {
-		setPictureModal(true);
-	}, []);
+		if (sessionUsername === profileUsername)
+			setPictureModal(true);
+	}, [profileUsername, sessionUsername]);
 
 	const closePictureModal = useCallback(async () => {
 		setPictureModal(false);
@@ -115,6 +116,12 @@ function Profile() {
 		commentBox = <div/>;
 		followButton = <div/>;
 	}
+
+	let profilePictureContainer = "profile-picture-container";
+	if (sessionUsername === profileUsername)
+	{
+		profilePictureContainer = "profile-picture-container-highlight"
+	}
 		
 	return(
 		<body>
@@ -125,7 +132,7 @@ function Profile() {
 			</Modal>
 			<div className="content-wrapper">
 				<div className="container profile-owner-container">
-					<div className="profile-picture-container" onClick={openPictureModal}>
+					<div className={profilePictureContainer} onClick={openPictureModal}>
 						<ProfilePicture username={profileUsername}/>
 					</div>
 					<div className="profile-owner-username">{profileUsername}</div>
