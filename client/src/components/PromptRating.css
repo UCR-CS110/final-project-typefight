@@ -1,0 +1,53 @@
+.PromptRating-Prompt {
+    background-color: #222;
+    padding: 10px 30px 15px;
+    border-radius: 0px 0px 12px 12px;
+}
+
+.PromptRating-Prompt > p {
+    color: rgb(220, 220, 220);
+    display: inline;
+}
+
+.PromptRating-Prompt p, .Upvote, .Downvote {
+    font-style: italic;
+    font-size: 1.5em;
+}
+
+.Upvote { color: #0588b4; }
+.Upvote:hover{ color: #0aafe6; }
+
+
+.Downvote { color: rgb(198, 74, 74); }
+.Downvote:hover {color:rgb(246, 72, 72);}
+
+.Appear {
+    z-index: -1;
+    animation-name: slide-down;
+    animation-duration: 2s;
+    animation-delay: 5s;
+    animation-timing-function: ease-out;
+    animation-fill-mode: forwards;
+    margin-top: -60px;
+}
+
+.Disappear {
+    z-index: -1;
+    animation-name: slide-up;
+    animation-duration: 3s;
+    animation-delay: 1s;
+    animation-timing-function: ease;
+    animation-fill-mode: forwards;
+}
+
+@keyframes slide-down {
+    from {margin-top: -60px;}
+    to {margin-top: 0px}
+    99% {z-index: -1;}
+    100% {z-index: 0;}
+}
+
+@keyframes slide-up {
+    from {margin-top: 0px;}
+    to {margin-top: -60px;}
+}
