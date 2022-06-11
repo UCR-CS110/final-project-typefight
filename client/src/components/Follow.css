@@ -12,11 +12,11 @@ a {
 	align-items: center;
 }
 
-.follower-picture {
-    height: 100px;
+.follower-profile-picture-container {
     width: 100px;
-    border-radius: 50px;
+	height: 100px;
 }
+
 .follower-username {
     font-size: 20px;
 }

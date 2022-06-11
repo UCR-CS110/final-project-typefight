@@ -3,7 +3,8 @@ const jwt = require("jsonwebtoken");
 const JWT_SECRET="jsdjfsjfksdfjhsdjfhdsfkjsdhf87879837937987*&&%^$%$^&^&^&^ksjhfkdhfksdhkfjhdskfjhdsk";
 
 const User = require("../models/User.js");
-const res = require('express/lib/response');
+const fs = require('fs');
+const path = require('path');
 
 // -- Handlers --
 async function getPasswordHash(req,res){
@@ -63,7 +64,8 @@ async function validateLogin(req, res){
 				id: user._id,
 				username: user.username
 			},
-			JWT_SECRET
+			JWT_SECRET,
+			{ expiresIn: '2h'} // expires in 2 hours
 		)
 		return res.json({ status: 'ok', data: token })
 	}
@@ -81,6 +83,11 @@ async function register(req, res){
 	  }
 	// const password = await bcrypt.hash(plainTextPassword, 10)
 
+	let profilePicture = {
+		data: fs.readFileSync(path.join(__dirname + '/uploads/default-profile-picture.png')),
+		contentType: 'image/png'
+	}
+
 	try{
 		await User.create({
 			username,
@@ -88,7 +95,8 @@ async function register(req, res){
 			gamesPlayed: 0,
 			averageWPM: 0,
 			averageAccuracy: 0,
-			rankScore: 0
+			rankScore: 0,
+			profilePicture: profilePicture
 		})
 	}catch(error) {
 		console.log("ERROR: " + error);
@@ -100,7 +108,8 @@ async function register(req, res){
 			id: reguser._id,
 			username: reguser.username
 		},
-		JWT_SECRET
+		JWT_SECRET,
+		{ expiresIn: '2h'} // expires in 2 hours
 	)
 	return res.json({status:"ok", data:token});
 }
@@ -109,7 +118,7 @@ async function validateToken(req, res){
 	const token = req.params.token;
 	try {
 		const decode = jwt.verify(token, JWT_SECRET);
-		console.log(decode);
+		//console.log(decode);
 		return res.json({
 			login: true,
 			decode: decode

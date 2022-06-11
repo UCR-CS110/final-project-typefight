@@ -1,7 +1,5 @@
-//import React, {useState} from 'react';
-import DefaultImage from '../images/default-profile-picture.png'
 import "./Comment.css"
-
+import ProfilePicture from './ProfilePicture.js'
 
 export default function Comment(props){
 

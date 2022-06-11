@@ -24,10 +24,9 @@ a {
 	align-items: center;
 }
 
-.commenter-picture {
-    height: 80px;
+.commenter-profile-picture-container {
     width: 80px;
-    border-radius: 50px;
+	height: 80px;
 }
 
 .text{

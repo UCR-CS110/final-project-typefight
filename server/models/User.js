@@ -6,7 +6,8 @@ const UserSchema = new mongoose.Schema ({
     gamesPlayed: {type: Number, required: true},
     averageWPM: {type: Number, required: true},
     averageAccuracy: {type: Number, required: true},
-    rankScore: {type: Number, required: true}
+    rankScore: {type: Number, required: true},
+    profilePicture: {data: Buffer, contentType: String}
 },
 {collection: "users"}//might need to change this
 )
