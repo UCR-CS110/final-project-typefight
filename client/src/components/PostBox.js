@@ -5,7 +5,7 @@ export default function PostBox(props){
     const [commentText, setCommentText] = useState("");
 
     const handleSubmit = (event) => {
-        //event.preventDefault();
+        event.preventDefault();
         fetch("http://localhost:8080/addComment", {
             method: "POST",
             headers: {
@@ -15,6 +15,7 @@ export default function PostBox(props){
 
             body: JSON.stringify({ profileOwner: props.profileOwner, commenter: props.commenter, text: commentText})
         })
+        .then(window.location.reload(false))
         .catch( (err) => {console.log("Error when posting comment:", err)});
     }
 

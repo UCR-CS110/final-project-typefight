@@ -85,13 +85,14 @@ function Profile() {
 
 	if (validToken) {
 		console.log("login token valid");
-		// validate the login token
+		
 		commentBox = <PostBox profileOwner={profileUsername} commenter={sessionUsername}/>
 
+		// TODO: Convert this HTML form to a react form (see PostBox.js)
 		followButton = <form action="http://localhost:8080/follow" method="POST">
 							<input type="hidden" name="profileOwner" value={profileUsername}/>
 							<input type="hidden" name="follower" value={sessionUsername}/>
-							<input type="submit" className="button follow-button blue-button" value="+Follower"/>
+							<input type="submit" className="button follow-button blue-button" value="+Follow"/>
 						</form>
 	}
 	else {
@@ -146,7 +147,8 @@ function Profile() {
 					<u className="header">Comments</u>
 					{commentBox}
 					{comments.map(comment => {
-						return <Comment commentId = {comment._id} commenter={comment.commenter} text={comment.text} date={comment.date}/>
+						return <Comment commentId={comment._id} commenter={comment.commenter} text={comment.text} date={comment.date}
+								profileOwner={profileUsername} sessionUsername={sessionUsername}/>
 					})}
 				</div>
 			</div>

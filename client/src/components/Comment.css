@@ -36,6 +36,10 @@ a {
 
 }
 
+.comment-right{
+    width: 140px;
+}
+
 .date{
     width: 140px;
     font-size: small;
@@ -43,4 +47,18 @@ a {
     display: block;
 	text-align: right;
     margin: 5px;
+}
+
+.delete-button {
+    width: 150px;
+    font-size: small;
+    color: #929292;
+    display: block;
+	text-align: right;
+    margin-top: 90px;
+}
+
+.delete-button:hover {
+	text-decoration: underline;
+	cursor: pointer;
 }

@@ -5,26 +5,23 @@ import "./Comment.css"
 
 export default function Comment(props){
 
-  // const [isSending, setIsSending] = useState(false);
-  // const [deleteButton, setDeleteButton] = useState("delete-button");
+  const deleteComment = () => {
+    //event.preventDefault();
+    fetch(`http://localhost:8080/deleteComment/${props.commentId}`, {
+      method: 'DELETE',
+    })
+    .then(console.log("Comment has been deleted"))
+    .then(window.location.reload(false))
+    .catch( (err) => {console.log("Error when deleting comment:", err)});
+}
 
-  // const deleteComment = useCallback(async () => {
-	// 	setDeleteButton("delete-button");
-	// 	// don't send again while we are sending
-	// 	if (isSending) return
-	// 	// update state
-	// 	setIsSending(true)
-	// 	// send the actual request
-	// 	await fetch(`http://localhost:8080/deleteComment/${commentId}`)
-	// 		.catch((error) => console.log(error));
-	// 	// once the request is sent, update state again
-	// 	if (isMounted.current) // only update if we are still mounted
-	// 		setIsSending(false)
-	// }, [isSending]) // update the callback if the state changes
-
-  // if(yourProfile || yourComment) {
-  //   deleteButton = <button className="delete-button" onClick={deleteComment}>Rank</button>
-  // }
+  let deleteButton;
+  if (props.profileOwner === props.sessionUsername || props.commenter === props.sessionUsername) {
+    deleteButton = <button className="delete-button" onClick={deleteComment}>Delete</button>
+  }
+  else {
+    deleteButton = <div/>
+  }
 
   return(
     <div className="comment">
@@ -33,7 +30,10 @@ export default function Comment(props){
           <div className="commenter-username">{props.commenter}</div>
         </a>
         <p className="text">{props.text}</p>
-        <div className="date">{props.date}</div>
+        <div className="comment-right">
+          <div className="date">{props.date}</div>
+          {deleteButton}
+        </div>
     </div>
   )
 }
