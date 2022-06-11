@@ -24,7 +24,14 @@ async function loadComments(req,res) {
 	});
 }
 
+async function deleteComment(req, res) {
+	let commentId = req.params.commentId;
+	Comment.find({_id: commentId}).deleteOne()
+	.catch(err => console.log("Error when deleting comment: ", err))
+}
+
 module.exports = {
     addComment,
-	loadComments
+	loadComments,
+	deleteComment
 };
