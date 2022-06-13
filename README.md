@@ -24,12 +24,12 @@ Users can socially interact with each other through profile pages, and for the c
     ![Home Page](https://drive.google.com/uc?export=view&id=11j0RlLb19vMZyvfHUkLsaQURnwmQnhJK "Home")
 
 - ### Game
-    Users are presented with a prompt randomly selected by the backend server. They are tasked with trying to type out most of the prompt as they can while under a certain time limit. Current implementation has set the time limit to 30s. The game ends if either the prompt is completely typed or if the time reaches 0. Results are then displayed and sent to the server.
+    Users are presented with a prompt randomly selected by the backend server. They are tasked with trying to type out most of the prompt as they can while under a certain time limit. Current implementation has set the time limit to 30s. The game ends if either the prompt is completely typed or if the time reaches 0. Results are then displayed and sent to the server. Players can like or dislike prompts in the results screen and give that prompt a rating.
 
     ![Game Page](https://drive.google.com/uc?export=view&id=17-Wub5jxF9E9xpDuGa16r8M0tr974cGv "Game")
 
 - ### Profile
-    Information about a particular user is presented here. The user's profile picture and username are at the top. Social interaction is done here through posting comments and following users. Game related information is also presented here like recent games and stats.
+    Information about a particular user is presented here. The user's profile picture and username are at the top. Social interaction is done here through posting comments and following users. Game related information is also presented here like recent games and stats. Usres can post comments and upload custom profile pictures for their profile.
 
     ![Profile Page](https://drive.google.com/uc?export=view&id=1xW8_4HAlKlHoPrZI61j8YCf0tiW4fnux "Profile")
 
